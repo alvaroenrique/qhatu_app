@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">qhatu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logo_qhatu">Logo_Qhatu</string>
+    <string name="menu_icon">Menu icon</string>
+    <string name="bg_menu">Bg menu</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_history">Historial de compras</string>
+    <string name="menu_actual_p">Compra actual</string>
+    <string name="menu_list_p">Lista de compras</string>
+    <string name="close_session">Cerrar Sesión</string>
+</resources>
