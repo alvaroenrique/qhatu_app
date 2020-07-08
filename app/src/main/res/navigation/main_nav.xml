@@ -25,4 +25,17 @@
         android:name="com.example.qhatu.ui.PurchaseListFragment"
         android:label="fragment_purchase_list"
         tools:layout="@layout/fragment_purchase_list" />
+
+    <fragment
+        android:id="@+id/purchaseListProductFragment"
+        android:name="com.example.qhatu.ui.PurchaseListProductFragment"
+        android:label="fragment_purchase_list_product"
+        tools:layout="@layout/fragment_purchase_list_product"/>
+
+    <fragment
+        android:id="@+id/purchaseListProductDetailFragment"
+        android:name="com.example.qhatu.ui.PurchaseListProductDetailFragment"
+        android:label="fragment_purchase_list_product_detail"
+        tools:layout="@layout/fragment_purchase_list_product_detail"/>
+
 </navigation>

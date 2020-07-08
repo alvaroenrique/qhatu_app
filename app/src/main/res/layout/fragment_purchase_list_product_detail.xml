@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/teviPLProdDetailTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/p_list_product_detail_title"
+        android:textAppearance="@style/sectitle"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"/>
+
+    <TextView
+        android:id="@+id/teviDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/teviPLProdDetailTitle"
+        android:textAppearance="@style/item_list_name"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="15dp"
+        android:text="La roja por favor."/>
+
+</RelativeLayout>

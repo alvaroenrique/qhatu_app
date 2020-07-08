@@ -10,4 +10,9 @@
     <string name="menu_actual_p">Compra actual</string>
     <string name="menu_list_p">Lista de compras</string>
     <string name="close_session">Cerrar Sesión</string>
+    <string name="p_list_title">Tu Lista de Compras</string>
+    <string name="p_list_product_title">Lacteos</string>
+    <string name="p_list_product_detail_title">Detalle de 1 leche gloria de 1L</string>
+    <string name="order_request_button">Agendar orden</string>
+    <string name="date_request_button">Solicitar cita</string>
 </resources>
