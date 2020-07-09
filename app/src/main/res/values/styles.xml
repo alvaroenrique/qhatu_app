@@ -28,6 +28,9 @@
         <item name="fontFamily">
             HelveticaNeue
         </item>
+        <item name="android:textStyle">
+            bold
+        </item>
     </style>
 
     <style name="item_list_name">
@@ -43,6 +46,9 @@
         <item name="fontFamily">
             HelveticaNeue
         </item>
+        <item name="android:textStyle">
+            bold
+        </item>
     </style>
 
     <style name="button_text">
@@ -51,6 +57,57 @@
         </item>
         <item name="android:textSize">
             14sp
+        </item>
+        <item name="android:textStyle">
+            bold
+        </item>
+    </style>
+
+    <style name="modal_field_text">
+        <item name="android:textSize">
+            14sp
+        </item>
+        <item name="android:textColor">
+            #000000
+        </item>
+        <item name="lineHeight">
+            16sp
+        </item>
+        <item name="fontFamily">
+            HelveticaNeue
+        </item>
+        <item name="android:textStyle">
+            bold
+        </item>
+    </style>
+
+    <style name="modal_selection_text">
+        <item name="lineHeight">
+            16sp
+        </item>
+        <item name="fontFamily">
+            HelveticaNeue
+        </item>
+        <item name="android:textSize">
+            14sp
+        </item>
+        <item name="android:textColor">
+            #52000000
+        </item>
+    </style>
+
+    <style name="modal_text">
+        <item name="android:textSize">
+            12sp
+        </item>
+        <item name="android:textColor">
+            #000000
+        </item>
+        <item name="lineHeight">
+            14sp
+        </item>
+        <item name="fontFamily">
+            HelveticaNeue
         </item>
     </style>
 

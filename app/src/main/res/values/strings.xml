@@ -15,4 +15,39 @@
     <string name="p_list_product_detail_title">Detalle de 1 leche gloria de 1L</string>
     <string name="order_request_button">Agendar orden</string>
     <string name="date_request_button">Solicitar cita</string>
+    <string name="ete_product_name">Ingresa un producto</string>
+
+    <string-array name="deliver_date">
+        <item>Elige una fecha de entrega</item>
+        <item>11 de Mayo, 9:00 am</item>
+        <item>11 de Mayo, 10:00 am</item>
+        <item>11 de Mayo, 11:00 am</item>
+    </string-array>
+
+    <string-array name="payment_method">
+        <item>Tarjeta</item>
+        <item>Efectivo</item>
+    </string-array>
+
+    <string-array name="markets">
+        <item>Wong</item>
+        <item>Metro</item>
+    </string-array>
+
+    <string-array name="mediums">
+        <item>Videoconferencia</item>
+        <item>Domicilio</item>
+    </string-array>
+
+    <string-array name="meeting_dates">
+        <item>10 de marzo, 11:00am</item>
+        <item>10 de marzo, 12:00m</item>
+    </string-array>
+
+    <string-array name="measurement_unit">
+        <item>Kg.</item>
+        <item>mg.</item>
+        <item>L.</item>
+        <item>ml.</item>
+    </string-array>
 </resources>

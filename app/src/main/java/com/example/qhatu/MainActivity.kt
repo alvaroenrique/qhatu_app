@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
             ), drawerLayout
         )
 
+
+
     }
 
     fun openCloseNavigationDrawer(view: View) {

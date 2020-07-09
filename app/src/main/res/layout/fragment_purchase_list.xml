@@ -22,7 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/teviPLTitle"
-        tools:listitem="@layout/item_category"/>
+        tools:listitem="@layout/item_category">
+    </ListView>
 
     <Button
         android:id="@+id/butOrderReq"
@@ -37,7 +38,7 @@
         android:textAppearance="@style/button_text"/>
 
     <Button
-        android:id="@+id/butDateReq"
+        android:id="@+id/butMeetingReq"
         android:layout_width="180dp"
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
