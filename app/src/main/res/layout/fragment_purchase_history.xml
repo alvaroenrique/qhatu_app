@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.PurchaseHistoryFragment">
+    tools:context=".ui.PurchaseListFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/teviHistoricPurchases"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Historial de compra" />
+        android:layout_height="wrap_content"
+        android:text="Pedidos Historicos"
+        android:textAppearance="@style/sectitle"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/border_bottom"/>
 
-</FrameLayout>
+    <ListView
+        android:id="@+id/liviHistoricPurchases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/teviHistoricPurchases"
+        tools:listitem="@layout/item_historic_purchases">
+    </ListView>
+
+</RelativeLayout>
