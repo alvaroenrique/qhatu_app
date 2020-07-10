@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="21dp"
+    android:paddingRight="21dp"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/modal_complaint_confirmation_text"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:textAppearance="@style/modal_text"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:text="Nos disculpamos por inconveniente causado. Como startup preocupada por la experiencia de nuestros usuarios, iniciaremos una investigació sobre el caso. Nos comunicaremos con usted en un rango de 24-48 horas. Confirme su denuncia por favor, o en todo caso cancele el proceso."/>
+
+    <Button
+        android:id="@+id/butCancel"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/first_button"
+        android:layout_below="@+id/modal_complaint_confirmation_text"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@style/button_text"
+        android:text="Cancelar"/>
+
+    <Button
+        android:id="@+id/butComplaint"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/red_button"
+        android:layout_below="@+id/butCancel"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@style/button_text"
+        android:text="Denunciar"/>
+
+</RelativeLayout>
