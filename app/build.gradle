@@ -56,5 +56,6 @@ dependencies {
     // Dynamic Feature Module Support
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
 
 }

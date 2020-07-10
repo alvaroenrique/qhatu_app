@@ -50,4 +50,6 @@
         <item>L.</item>
         <item>ml.</item>
     </string-array>
+
+    <string name="cambiar_foto_de_perfil">Cambiar foto de perfil</string>
 </resources>
