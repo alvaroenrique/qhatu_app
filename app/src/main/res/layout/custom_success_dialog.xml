@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:text="¡Proceso exitoso!"/>
+        android:text="@string/dialog_success"/>
 
     <Button
         android:id="@+id/butAccept"
@@ -28,6 +28,6 @@
         android:layout_below="@+id/modal_success_title"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Aceptar"/>
+        android:text="@string/dialog_accept_button"/>
 
 </RelativeLayout>

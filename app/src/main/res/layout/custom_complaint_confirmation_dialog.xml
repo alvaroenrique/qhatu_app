@@ -12,12 +12,12 @@
         android:id="@+id/modal_complaint_confirmation_text"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="5dp"
+        android:paddingVertical="15dp"
         android:textAppearance="@style/modal_text"
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:text="Nos disculpamos por inconveniente causado. Como startup preocupada por la experiencia de nuestros usuarios, iniciaremos una investigació sobre el caso. Nos comunicaremos con usted en un rango de 24-48 horas. Confirme su denuncia por favor, o en todo caso cancele el proceso."/>
+        android:text="@string/dialog_sorry_text"/>
 
     <Button
         android:id="@+id/butCancel"
@@ -28,7 +28,7 @@
         android:layout_below="@+id/modal_complaint_confirmation_text"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Cancelar"/>
+        android:text="@string/dialog_cancel_button"/>
 
     <Button
         android:id="@+id/butComplaint"
@@ -39,6 +39,6 @@
         android:layout_below="@+id/butCancel"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Denunciar"/>
+        android:text="@string/dialog_complaint_button"/>
 
 </RelativeLayout>

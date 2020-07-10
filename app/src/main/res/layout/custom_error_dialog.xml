@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:text="¡Ups! Algo ha salido mal. Intente nuevamente"/>
+        android:text="@string/dialog_ups"/>
 
     <Button
         android:id="@+id/butClose"
@@ -28,6 +28,6 @@
         android:layout_below="@+id/modal_error_title"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Cerrar"/>
+        android:text="@string/dialog_close"/>
 
 </RelativeLayout>

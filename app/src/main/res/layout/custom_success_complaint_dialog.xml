@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:text="Denuncia procesada exitosamente."/>
+        android:text="@string/dialog_complaint_success"/>
 
     <Button
         android:id="@+id/butAccept"
@@ -28,6 +28,6 @@
         android:layout_below="@+id/modal_complaint_success_title"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Eliminar"/>
+        android:text="@string/dialog_close"/>
 
 </RelativeLayout>

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/item_list_name"
         android:padding="30dp"
-        android:text="10 de marzo a las 9:00am"
+        android:text="@string/item_purchase_historic_date"
         android:layout_centerVertical="true"/>
 
     <ImageView
@@ -19,6 +19,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:paddingRight="30dp"
-        android:src="@drawable/ic_action_name"/>
+        android:src="@drawable/ic_action_name"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="30dp" />
 
 </RelativeLayout>

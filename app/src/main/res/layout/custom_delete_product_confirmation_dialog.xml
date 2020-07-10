@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:text="¡Un momento!"/>
+        android:text="@string/dialog_wait"/>
 
     <TextView
         android:id="@+id/teviDisableProduct"
@@ -29,7 +29,7 @@
         android:textAlignment="center"
         android:gravity="center"
         android:textAppearance="@style/modal_text"
-        android:text="Al presionar eliminar usted eliminara 1 leche gloria de 1 litro de su lista de productos. Este cambio no puede ser revertido. Pero si puede volver a anadir el producto cuando desee."/>
+        android:text="@string/dialog_wait_text"/>
 
     <Button
         android:id="@+id/butDeleteProduct"
@@ -40,6 +40,6 @@
         android:layout_below="@+id/teviDisableProduct"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Eliminar"/>
+        android:text="@string/dialog_delete_button"/>
 
 </RelativeLayout>

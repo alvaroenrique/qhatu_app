@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:text="Cuentanos, ¿Que paso?"/>
+        android:text="@string/dialog_what_happened"/>
 
     <EditText
         android:id="@+id/eteComplaintDetail"
@@ -26,7 +26,7 @@
         android:layout_marginVertical="5dp"
         android:layout_below="@+id/modal_complaint_detail_text"
         android:layout_centerHorizontal="true"
-        android:hint="Detalla el suceso aqui"/>
+        android:hint="@string/dialog_complaint_hint"/>
 
     <ImageView
         android:id="@+id/iviComplaintDetail"
@@ -44,6 +44,6 @@
         android:layout_below="@+id/iviComplaintDetail"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Denunciar"/>
+        android:text="@string/dialog_complaint_button"/>
 
 </RelativeLayout>

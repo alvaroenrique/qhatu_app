@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:text="¿Que desea hacer con el producto?"/>
+        android:text="@string/dialog_what_to_do"/>
 
     <Button
         android:id="@+id/butDisableProduct"
@@ -28,7 +28,7 @@
         android:layout_below="@+id/modal_what_to_do_title"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Deshabilitar"/>
+        android:text="@string/dialog_disable"/>
 
     <Button
         android:id="@+id/butDeleteProduct"
@@ -39,6 +39,6 @@
         android:layout_below="@+id/butDisableProduct"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Eliminar"/>
+        android:text="@string/dialog_delete_button"/>
 
 </RelativeLayout>

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textAppearance="@style/modal_field_text"
-            android:text="Nombre del producto" />
+            android:text="@string/dialog_product_name" />
 
         <EditText
             android:id="@+id/eteProductName"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textAppearance="@style/modal_field_text"
-            android:text="Cantidad" />
+            android:text="@string/dialog_product_quantity" />
 
         <NumberPicker
             android:id="@+id/eteProductQuantity"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textAppearance="@style/modal_field_text"
-            android:text="Unidad de medida" />
+            android:text="@string/dialog_measurement_unit" />
 
         <Spinner
             android:id="@+id/eteMeasurementUnit"
@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textAppearance="@style/modal_field_text"
-            android:text="Cantidad de medida" />
+            android:text="@string/dialog_measurement_quantity" />
 
         <NumberPicker
             android:id="@+id/eteMesurementQuantity"
@@ -158,7 +158,7 @@
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/modal_field_text"
-            android:text="Detalle" />
+            android:text="@string/dialog_detail" />
 
         <EditText
             android:id="@+id/eteDetail"
@@ -169,7 +169,7 @@
             android:layout_alignParentEnd="true"
             android:textAlignment="viewEnd"
             android:gravity="end"
-            android:hint="Detalle su producto"/>
+            android:hint="@string/dialog_detail_hint"/>
 
     </RelativeLayout>
 
@@ -189,7 +189,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_marginTop="300dp"
-        android:text="Modifica los campos para ver tu pedido."/>
+        android:text="@string/dialog_product_preview"/>
 
     <Button
         android:id="@+id/butOrder"
@@ -201,6 +201,6 @@
         android:background="@drawable/second_button"
         android:textAppearance="@style/button_text"
         android:layout_below="@+id/teviRequestPreview"
-        android:text="Agregar"/>
+        android:text="@string/dialog_add_product"/>
 
 </RelativeLayout>

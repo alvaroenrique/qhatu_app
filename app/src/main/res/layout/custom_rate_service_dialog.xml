@@ -33,7 +33,7 @@
         android:layout_marginVertical="5dp"
         android:layout_below="@+id/rabaRateService"
         android:layout_centerHorizontal="true"
-        android:hint="Dejanos un comentario..."/>
+        android:hint="@string/dialog_rate_comment_hint"/>
 
     <ImageView
         android:id="@+id/iviRateComment"
@@ -51,6 +51,6 @@
         android:layout_below="@+id/iviRateComment"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/button_text"
-        android:text="Calificar"/>
+        android:text="@string/dialog_rate_button"/>
 
 </RelativeLayout>

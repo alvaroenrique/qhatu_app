@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.PurchaseListFragment">
+    tools:context=".ui.PurchaseHistoryFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/teviHistoricPurchases"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pedidos Historicos"
+        android:text="@string/historic_purchases"
         android:textAppearance="@style/sectitle"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"

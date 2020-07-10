@@ -20,7 +20,7 @@
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/modal_field_text"
-            android:text="Fecha de cita"/>
+            android:text="@string/dialog_meeting_date"/>
 
         <Spinner
             android:id="@+id/spiMeetingDate"
@@ -54,7 +54,7 @@
             android:id="@+id/teviMedium"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:text="Medio"
+            android:text="@string/dialog_meeting_medium"
             android:textAppearance="@style/modal_field_text"
             android:layout_centerVertical="true"/>
 
@@ -85,7 +85,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_below="@id/iviMedium"
-        android:text="La cita con la fecha y el medio elegido seran enviados al correo electronico proporcionado."/>
+        android:text="@string/dialog_meeting_advice"/>
 
     <Button
         android:id="@+id/butRequestMeeting"
@@ -97,6 +97,6 @@
         android:background="@drawable/second_button"
         android:textAppearance="@style/button_text"
         android:layout_below="@+id/teviAdvice"
-        android:text="Solicitar cita"/>
+        android:text="@string/dialog_request_meeting_button"/>
 
 </RelativeLayout>
