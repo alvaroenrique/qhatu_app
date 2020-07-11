@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
+import com.example.qhatu.MainActivity
+import com.example.qhatu.MainActivityViewModel
 import com.example.qhatu.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,6 +39,15 @@ class PurchaseListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_purchase_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val model = ViewModelProviders.of((activity as MainActivity)).get(MainActivityViewModel::class.java)
+
+        model.isLogged.value = true
+
     }
 
     companion object {
