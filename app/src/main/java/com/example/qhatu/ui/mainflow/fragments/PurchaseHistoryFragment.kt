@@ -1,13 +1,10 @@
-package com.example.qhatu.ui
+package com.example.qhatu.ui.mainflow.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
-import com.example.qhatu.MainActivity
-import com.example.qhatu.MainActivityViewModel
 import com.example.qhatu.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -17,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PurchaseListFragment.newInstance] factory method to
+ * Use the [PurchaseHistoryFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PurchaseListFragment : Fragment() {
+class PurchaseHistoryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -38,16 +35,7 @@ class PurchaseListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_purchase_list, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val model = ViewModelProviders.of((activity as MainActivity)).get(MainActivityViewModel::class.java)
-
-        model.isLogged.value = true
-
+        return inflater.inflate(R.layout.fragment_purchase_history, container, false)
     }
 
     companion object {
@@ -57,12 +45,12 @@ class PurchaseListFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment PurchaseListFragment.
+         * @return A new instance of fragment PurchaseHistoryFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            PurchaseListFragment().apply {
+            PurchaseHistoryFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

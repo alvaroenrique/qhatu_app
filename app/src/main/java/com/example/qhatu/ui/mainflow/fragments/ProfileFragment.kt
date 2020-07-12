@@ -1,18 +1,11 @@
-package com.example.qhatu.ui
+package com.example.qhatu.ui.mainflow.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
-import com.example.qhatu.MainActivity
-import com.example.qhatu.MainActivityViewModel
 import com.example.qhatu.R
-import kotlinx.android.synthetic.main.fragment_register.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,17 +14,11 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [RegisterFragment.newInstance] factory method to
+ * Use the [ProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RegisterFragment : Fragment() {
-    private var butRegistrarUsuario : Button? = null
-    private var tipoDoc: String? = null
-    private var numDoc : String? = null
-    private var correo : String? = null
-    private var pass : String? = null
-    private var passConf : String? = null
-
+class ProfileFragment : Fragment() {
+    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -48,27 +35,13 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        butRegistrarUsuario = view.findViewById(R.id.butRegisterUser)
-        val model = ViewModelProviders.of((activity as MainActivity)).get(MainActivityViewModel::class.java)
-        model.isLogged.value = true
 
-        butRegistrarUsuario?.setOnClickListener {v:View ->
-
-            tipoDoc = view.eteTipoDoc.text.toString()
-            numDoc = view.eteNroDoc.text.toString()
-            correo = view.eteContra.text.toString()
-            pass = view.eteContra.text.toString()
-            passConf = view.eteContraConf.text.toString()
-
-            model.RegistrarUsuario(tipoDoc.toString(),numDoc.toString(),correo.toString(),pass.toString(),passConf.toString())
-            Navigation.findNavController(v).navigate(R.id.action_registerFragment_to_loginFragment)
-
-        }
+        //Navigation.findNavController(view).navigate(R.id.loginFragment)
 
     }
 
@@ -79,12 +52,12 @@ class RegisterFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment RegisterFragment.
+         * @return A new instance of fragment ProfileFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            RegisterFragment().apply {
+            ProfileFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

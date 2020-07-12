@@ -1,18 +1,17 @@
-package com.example.qhatu
+package com.example.qhatu.ui.mainflow.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.example.qhatu.viewmodel.MainActivityViewModel
+import com.example.qhatu.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -45,14 +44,14 @@ class MainActivity : AppCompatActivity() {
             ), drawerLayout
         )
 
-        val nameObserver = Observer<Boolean> { newName ->
+        /*val nameObserver = Observer<Boolean> { newName ->
             if (newName == true) {
                 //navController.navigate(R.id.loginFragment)
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 layoutToolBar.visibility = View.GONE
             }
         }
-        model.isLogged.observe(this, nameObserver)
+        model.isLogged.observe(this, nameObserver)*/
 
     }
 

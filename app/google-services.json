@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "588259118534",
+    "firebase_url": "https://qhatu-2bd07.firebaseio.com",
+    "project_id": "qhatu-2bd07",
+    "storage_bucket": "qhatu-2bd07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588259118534:android:4c4c61157847a41de036c7",
+        "android_client_info": {
+          "package_name": "com.example.qhatu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588259118534-urb7qh6i9991skd0g9f5cinq30u5c88j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA18_uWB6MnrXHwQ_MQSBzUTWA0cVZPnpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588259118534-urb7qh6i9991skd0g9f5cinq30u5c88j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
