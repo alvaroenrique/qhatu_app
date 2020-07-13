@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -20,12 +19,9 @@ import com.example.qhatu.domain.ProfileUseCase
 import com.example.qhatu.ui.mainflow.activities.MainActivity
 import com.example.qhatu.ui.model.dao.User
 import com.example.qhatu.viewmodel.MainActivityViewModel
-import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.coroutines.flow.callbackFlow
-import java.io.ByteArrayOutputStream
 import java.lang.Exception
 
 
@@ -52,7 +48,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         model = ViewModelProvider((activity as MainActivity)).get(MainActivityViewModel::class.java)
-        profileUserCase = ProfileUseCase(model)
+        profileUserCase = ProfileUseCase(model, (activity as MainActivity))
 
         profilePurchaseListLink.setOnClickListener {
             Navigation.findNavController(view)
@@ -61,6 +57,15 @@ class ProfileFragment : Fragment() {
 
         profileChangePhotoField.setOnClickListener {
             takePictureIntent()
+        }
+
+        profileButtonUpdateData.setOnClickListener {
+            profileUserCase.updateUserProfileData(
+                profileNameInput.text.toString(),
+                profileLastNameInput.text.toString(),
+                profilePhoneInput.text.toString().toLong(),
+                profileEmailInput.text.toString()
+            )
         }
 
         setUserProfileData()

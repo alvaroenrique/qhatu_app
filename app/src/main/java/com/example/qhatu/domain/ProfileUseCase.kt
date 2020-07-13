@@ -1,18 +1,17 @@
 package com.example.qhatu.domain
 
+import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
 import com.example.qhatu.data.FirestoreRepository
 import com.example.qhatu.ui.mainflow.activities.MainActivity
 import com.example.qhatu.ui.model.dao.User
 import com.example.qhatu.viewmodel.MainActivityViewModel
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.fragment_profile.*
 import java.io.ByteArrayOutputStream
 
-class ProfileUseCase(private val model: MainActivityViewModel) {
+class ProfileUseCase(private val model: MainActivityViewModel, private val context: Context) {
 
     private val fireStoreRepository = FirestoreRepository()
 
@@ -72,6 +71,51 @@ class ProfileUseCase(private val model: MainActivityViewModel) {
                 }
             }
         }
+
+    }
+
+    fun updateUserProfileData(
+        newName: String,
+        newLastName: String,
+        newPhone: Long,
+        newEmail: String
+    ) {
+        fireStoreRepository.getUserRefById(userId)
+            .get()
+            .addOnSuccessListener { result ->
+                result
+                val userData: DocumentReference? = result.data?.get("customer") as DocumentReference
+                userData?.update(
+                    mapOf(
+                        "nombre" to newName,
+                        "apellidos" to newLastName,
+                        "celular" to newPhone,
+                        "mail" to newEmail
+                    )
+                )?.addOnSuccessListener {
+                    val currentUser: User? = model.getUser().value
+                    if (currentUser != null) {
+                        currentUser.nombre = newName
+                        currentUser.apellidos = newLastName
+                        currentUser.celular = newPhone
+                        currentUser.mail = newEmail
+
+                        model.setUser(currentUser)
+                    }
+                    Toast.makeText(
+                        context,
+                        "Los datos fueron actualizados correctamente",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(
+                    context,
+                    "Ha ocurrido un error",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
 
     }
 
