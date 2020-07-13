@@ -1,5 +1,6 @@
 package com.example.qhatu.viewmodel
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +15,8 @@ class MainActivityViewModel: ViewModel() {
 
     private var user = MutableLiveData<User>()
 
+    private var userPicture = MutableLiveData<Uri>()
+
     // Setters de mutable data
     fun setUser(newUser: User) {
         user.value = newUser
@@ -21,6 +24,14 @@ class MainActivityViewModel: ViewModel() {
 
     fun getUser(): LiveData<User> {
         return user
+    }
+
+    fun setUserPicture(newUserPicture: Uri) {
+        userPicture.value = newUserPicture
+    }
+
+    fun getUserPicture(): LiveData<Uri> {
+        return userPicture
     }
 
     // Llamada a las funciones de los casos de uso

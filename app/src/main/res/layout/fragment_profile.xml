@@ -21,8 +21,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ProgressBar
+            android:id="@+id/profilePictureProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/profileChangePhotoField"
             style="@style/change_profile_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +49,7 @@
             android:background="@drawable/border_top"
             android:paddingHorizontal="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView">
+            app:layout_constraintTop_toBottomOf="@id/profileChangePhotoField">
 
             <TextView
                 style="@style/profile_field"
@@ -242,7 +251,20 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/butMeetingReq"
+            android:id="@+id/profileButtonUpdateData"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/blue_button"
+            android:text="@string/profile_button_update"
+            android:textAppearance="@style/button_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilePurchaseListLink" />
+
+        <Button
+            android:id="@+id/profileButtonCloseSession"
             android:layout_width="180dp"
             android:layout_height="30dp"
             android:layout_marginTop="30dp"
@@ -253,7 +275,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listLink" />
+            app:layout_constraintTop_toBottomOf="@+id/profileButtonUpdateData" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

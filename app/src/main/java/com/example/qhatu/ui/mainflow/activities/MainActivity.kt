@@ -49,7 +49,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         model = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        profileUserCase = ProfileUseCase("8HweNAVEWwkeKjru0CZH", model)
+        profileUserCase = ProfileUseCase(model)
+        profileUserCase.setUserData()
 
 
     }
