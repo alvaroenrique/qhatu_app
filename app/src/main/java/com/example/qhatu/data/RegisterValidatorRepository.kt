@@ -22,7 +22,7 @@ class RegisterValidatorRepository {
                 if (!it.isEmpty) {
                     val activeCustomerDoc = it.documents[0]
                     val activeCustomerDocID = it.documents[0].id
-                    val activeCustomerDocRef = it.documents[0].reference
+                    val activeCustomerDocRef = it.documents[0].reference.path
                     Log.d("ActiveCustomerLog::", activeCustomerDoc.toString())
                     Log.d("ActiveCustomerLog::", activeCustomerDocID)
                     Log.d("ActiveCustomerLog::", activeCustomerDocRef.toString())
