@@ -60,7 +60,7 @@
                 app:layout_constraintWidth_percent="0.7">
 
                 <com.google.android.material.textfield.TextInputEditText
-
+                    android:id="@+id/profileNameInput"
                     style="@style/profile_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,6 +96,7 @@
                 app:layout_constraintWidth_percent="0.7">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileLastNameInput"
                     style="@style/profile_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,6 +132,7 @@
                 app:layout_constraintWidth_percent="0.7">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profilePhoneInput"
                     style="@style/profile_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -166,6 +168,7 @@
                 app:layout_constraintWidth_percent="0.7">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileEmailInput"
                     style="@style/profile_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -195,6 +198,7 @@
                 app:layout_constraintWidth_percent="0.3" />
 
             <TextView
+                android:id="@+id/profileDirectionField"
                 style="@style/profile_field"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -207,7 +211,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RelativeLayout
-            android:id="@+id/listLink"
+            android:id="@+id/profilePurchaseListLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"

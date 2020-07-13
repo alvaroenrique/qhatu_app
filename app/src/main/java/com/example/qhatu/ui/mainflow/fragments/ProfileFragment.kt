@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.qhatu.R
+import com.example.qhatu.ui.mainflow.activities.MainActivity
+import com.example.qhatu.ui.model.dao.User
+import com.example.qhatu.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +48,28 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Navigation.findNavController(view).navigate(R.id.loginFragment)
+        profilePurchaseListLink.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_purchaseListFragment)
+        }
+
+        val model = ViewModelProvider((activity as MainActivity)).get(MainActivityViewModel::class.java)
+        val currentUser = model.getUser().value
+
+        profileNameInput.setText(currentUser?.nombre)
+        profileLastNameInput.setText(currentUser?.apellidos)
+        profilePhoneInput.setText("${currentUser?.celular ?: ""}")
+        profileEmailInput.setText(currentUser?.mail)
+        profileDirectionField.text = currentUser?.domicilio
+
+        val nameObserver = Observer<User> { newName ->
+            profileNameInput.setText(newName.nombre)
+            profileLastNameInput.setText(newName.apellidos)
+            profilePhoneInput.setText("${newName.celular}")
+            profileEmailInput.setText(newName.mail)
+            profileDirectionField.text = newName.domicilio
+        }
+        model.getUser().observe(viewLifecycleOwner, nameObserver)
+
 
     }
 

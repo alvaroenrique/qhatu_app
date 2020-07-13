@@ -6,12 +6,14 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.qhatu.viewmodel.MainActivityViewModel
 import com.example.qhatu.R
+import com.example.qhatu.domain.ProfileUseCase
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -23,7 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var listener: NavController.OnDestinationChangedListener
 
-    private val model: MainActivityViewModel by viewModels()
+    private lateinit var model: MainActivityViewModel
+
+    private lateinit var profileUserCase: ProfileUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,14 +48,9 @@ class MainActivity : AppCompatActivity() {
             ), drawerLayout
         )
 
-        /*val nameObserver = Observer<Boolean> { newName ->
-            if (newName == true) {
-                //navController.navigate(R.id.loginFragment)
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                layoutToolBar.visibility = View.GONE
-            }
-        }
-        model.isLogged.observe(this, nameObserver)*/
+        model = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        profileUserCase = ProfileUseCase("8HweNAVEWwkeKjru0CZH", model)
+
 
     }
 
