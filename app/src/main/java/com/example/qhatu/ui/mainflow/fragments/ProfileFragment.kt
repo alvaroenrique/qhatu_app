@@ -17,7 +17,8 @@ import androidx.navigation.Navigation
 import com.example.qhatu.R
 import com.example.qhatu.domain.ProfileUseCase
 import com.example.qhatu.ui.mainflow.activities.MainActivity
-import com.example.qhatu.ui.model.dao.User
+import com.example.qhatu.ui.model.UserInfo
+
 import com.example.qhatu.viewmodel.MainActivityViewModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -102,7 +103,7 @@ class ProfileFragment : Fragment() {
         profileEmailInput.setText(currentUser?.mail)
         profileDirectionField.text = currentUser?.domicilio
 
-        val userObserver = Observer<User> { newName ->
+        val userObserver = Observer<UserInfo> { newName ->
             profileNameInput.setText(newName.nombre)
             profileLastNameInput.setText(newName.apellidos)
             profilePhoneInput.setText("${newName.celular}")

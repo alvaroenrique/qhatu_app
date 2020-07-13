@@ -1,11 +1,11 @@
 package com.example.qhatu.viewmodel
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.qhatu.ui.model.dao.User
+import com.example.qhatu.ui.model.UserInfo
+
 
 class MainActivityViewModel: ViewModel() {
 
@@ -13,16 +13,16 @@ class MainActivityViewModel: ViewModel() {
 
     // Se setean los mutable data
 
-    private var user = MutableLiveData<User>()
+    private var user = MutableLiveData<UserInfo>()
 
     private var userPicture = MutableLiveData<Uri>()
 
     // Setters de mutable data
-    fun setUser(newUser: User) {
+    fun setUser(newUser: UserInfo) {
         user.value = newUser
     }
 
-    fun getUser(): LiveData<User> {
+    fun getUser(): LiveData<UserInfo> {
         return user
     }
 

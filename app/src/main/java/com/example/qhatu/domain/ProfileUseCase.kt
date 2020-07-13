@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.widget.Toast
 import com.example.qhatu.data.FirestoreRepository
-import com.example.qhatu.ui.mainflow.activities.MainActivity
-import com.example.qhatu.ui.model.dao.User
+import com.example.qhatu.ui.model.User
+import com.example.qhatu.ui.model.UserInfo
 import com.example.qhatu.viewmodel.MainActivityViewModel
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.storage.FirebaseStorage
@@ -29,7 +29,7 @@ class ProfileUseCase(private val model: MainActivityViewModel, private val conte
                 result
                 val userData: DocumentReference? = result.data?.get("customer") as DocumentReference
                 userData?.get()?.addOnSuccessListener { res ->
-                    val customerUserData: User? = res.toObject(User::class.java)
+                    val customerUserData: UserInfo? = res.toObject(UserInfo::class.java)
 
                     if (customerUserData != null) {
                         model.setUser(customerUserData)
@@ -93,7 +93,7 @@ class ProfileUseCase(private val model: MainActivityViewModel, private val conte
                         "mail" to newEmail
                     )
                 )?.addOnSuccessListener {
-                    val currentUser: User? = model.getUser().value
+                    val currentUser: UserInfo? = model.getUser().value
                     if (currentUser != null) {
                         currentUser.nombre = newName
                         currentUser.apellidos = newLastName
