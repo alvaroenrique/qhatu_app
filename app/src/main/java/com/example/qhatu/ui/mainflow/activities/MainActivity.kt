@@ -92,12 +92,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun ListasProductos(id_clickeado:String){
+        mainActivityViewmodel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        val uid = mainActivityViewmodel.getUid().value
         var listaProducto = ArrayList<Producto>()
         db = FirebaseFirestore.getInstance()
-        ListadoProductoManager().obtenerListaProducto(id_clickeado, db as FirebaseFirestore){
+        ListadoProductoManager().obtenerListaProducto(uid.toString(), id_clickeado, db as FirebaseFirestore){
             listaProducto = it
             mlistarProductos = findViewById(R.id.liviPLProduct)
             mlistarProductos?.adapter = ListadoProductoAdapter(this, listaProducto)
+            Log.i("quatu", "ESTO ES ->" + uid)
         }
     }
 
