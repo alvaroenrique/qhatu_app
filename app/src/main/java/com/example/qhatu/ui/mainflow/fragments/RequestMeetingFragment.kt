@@ -6,17 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-//import androidx.lifecycle.ViewModelProviders
 import com.example.qhatu.R
 import com.example.qhatu.ui.mainflow.activities.MainActivity
 import com.example.qhatu.viewmodel.ModalViewModel
-import kotlinx.android.synthetic.main.fragment_purchase_list.*
+import kotlinx.android.synthetic.main.fragment_request_meeting.*
 
 
-class PurchaseListFragment : Fragment() {
+class RequestMeetingFragment : Fragment() {
 
     lateinit var modalViewmodel: ModalViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +26,7 @@ class PurchaseListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_purchase_list, container, false)
+        return inflater.inflate(R.layout.fragment_request_meeting, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,8 +34,8 @@ class PurchaseListFragment : Fragment() {
 
         modalViewmodel = ViewModelProvider((activity as MainActivity)).get(ModalViewModel::class.java)
 
-        butMeetingReq.setOnClickListener {
-            modalViewmodel.setModalState(ModalViewModel.ModalState.REQUEST_MEETING)
+        requestMeetingCloseIcon.setOnClickListener {
+            modalViewmodel.setModalState(ModalViewModel.ModalState.CLOSED)
         }
 
     }

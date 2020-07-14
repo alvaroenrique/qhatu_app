@@ -103,14 +103,13 @@ class ProfileFragment : Fragment() {
         profileEmailInput.setText(currentUser?.mail)
         profileDirectionField.text = currentUser?.domicilio
 
-        val userObserver = Observer<UserInfo> { newName ->
+        model.getUser().observe(viewLifecycleOwner, Observer<UserInfo> { newName ->
             profileNameInput.setText(newName.nombre)
             profileLastNameInput.setText(newName.apellidos)
             profilePhoneInput.setText("${newName.celular}")
             profileEmailInput.setText(newName.mail)
             profileDirectionField.text = newName.domicilio
-        }
-        model.getUser().observe(viewLifecycleOwner, userObserver)
+        })
 
 
     }
@@ -127,7 +126,7 @@ class ProfileFragment : Fragment() {
                 }
             })
 
-        val userPictureObserver = Observer<Uri> { newUserPicture ->
+        model.getUserPicture().observe(viewLifecycleOwner, Observer<Uri> { newUserPicture ->
             Picasso.get()
                 .load(newUserPicture)
                 .into(circularImageView, object : Callback {
@@ -138,8 +137,7 @@ class ProfileFragment : Fragment() {
                     override fun onError(e: Exception?) {
                     }
                 })
-        }
-        model.getUserPicture().observe(viewLifecycleOwner, userPictureObserver)
+        })
     }
 
 
