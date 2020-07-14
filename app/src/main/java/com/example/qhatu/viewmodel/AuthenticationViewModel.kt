@@ -18,7 +18,9 @@ class AuthenticationViewModel : ViewModel() {
     val persistenceUseCase = PersistenceUseCase()
 
     // Setear Mutable Live Data
-    private val userLiveData = MutableLiveData<User>()
+    companion object Factory {
+        private val userLiveData = MutableLiveData<User>()
+    }
 
     // Setear value setters para los live data
     fun setUser(user: User) {
