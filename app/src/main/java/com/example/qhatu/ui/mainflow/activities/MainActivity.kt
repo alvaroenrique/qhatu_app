@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ListView
-import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -19,19 +18,16 @@ import com.example.qhatu.R
 import com.example.qhatu.adapters.ListadoComprasAdapter
 import com.example.qhatu.adapters.ListadoProductoAdapter
 import com.example.qhatu.domain.ProfileUseCase
-import com.example.qhatu.model.Categorias
-import com.example.qhatu.model.ListadoComprasManager
-import com.example.qhatu.model.ListadoProductoManager
-import com.example.qhatu.model.Producto
+import com.example.qhatu.model.*
 import com.example.qhatu.ui.mainflow.fragments.RequestMeetingFragment
-import com.example.qhatu.ui.model.UserInfo
+import com.example.qhatu.ui.mainflow.interfaces.OnDeliveryDatesNeeded
 import com.example.qhatu.viewmodel.ModalViewModel
+import com.example.qhatu.viewmodel.RequestOrderViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded {
     private var mlistarCategorias : ListView? = null
     private var mlistarProductos : ListView? = null
     private var db : FirebaseFirestore? = null
@@ -43,14 +39,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var listener: NavController.OnDestinationChangedListener
 
     private lateinit var mainActivityViewmodel: MainActivityViewModel
-    private lateinit var modalViewmodel: ModalViewModel
 
+    // RequestOrderViewModel
+    private var requestOrderViewModel : RequestOrderViewModel? = null
+    private var availableDeliveryDateArrayList : ArrayList<DeliveryDate>? = null
+
+    private lateinit var modalViewmodel: ModalViewModel
 
     private lateinit var profileUserCase: ProfileUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setUpRequestOrderViewModel()
+        requestOrderViewModel!!.getAvailableDeliveryDateArray {  }
 
         navController = findNavController(R.id.fragment)
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -86,10 +88,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
 
-
-
-
+    fun setUpRequestOrderViewModel(){
+        requestOrderViewModel = RequestOrderViewModel()
+        val availableDeliveryDatesObserver = Observer<ArrayList<DeliveryDate>>{
+            if (it.isNotEmpty()){
+                availableDeliveryDateArrayList = it
+            }
+        }
+        requestOrderViewModel!!.getAvailableDeliveryDateArrayDataLiveData().observe(this, availableDeliveryDatesObserver)
     }
 
     fun ListarCategorias(){
@@ -121,5 +129,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             drawerLayout.openDrawer(GravityCompat.START)
         }
+    }
+
+    override fun getDeliveryDates(): ArrayList<DeliveryDate>? {
+        return availableDeliveryDateArrayList
     }
 }
