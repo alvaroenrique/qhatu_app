@@ -29,3 +29,10 @@ data class UserInfo(
     var nombre: String = "",
     val referencia: String = ""
 )
+
+data class Meeting(
+    var available: Boolean = false,
+    var date: Timestamp = Timestamp(
+        Date()
+    )
+)

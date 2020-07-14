@@ -131,7 +131,9 @@ class ProfileFragment : Fragment() {
                 .load(newUserPicture)
                 .into(circularImageView, object : Callback {
                     override fun onSuccess() {
-                        profilePictureProgressBar.visibility = View.GONE
+                        if (profilePictureProgressBar != null) {
+                            profilePictureProgressBar.visibility = View.GONE
+                        }
                     }
 
                     override fun onError(e: Exception?) {

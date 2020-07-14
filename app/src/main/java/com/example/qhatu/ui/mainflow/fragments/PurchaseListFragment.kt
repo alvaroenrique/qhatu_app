@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ListView
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 //import androidx.lifecycle.ViewModelProviders
 import com.example.qhatu.R
 import com.example.qhatu.ui.mainflow.activities.MainActivity
-import com.example.qhatu.viewmodel.ModalViewModel
 import kotlinx.android.synthetic.main.fragment_purchase_list.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,7 +25,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class PurchaseListFragment : Fragment() {
     private var mlistarCategorias : ListView? = null
-    lateinit var modalViewmodel: ModalViewModel
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -75,10 +72,12 @@ class PurchaseListFragment : Fragment() {
 
         model.isLogged.value = true*/
 
-        modalViewmodel = ViewModelProvider((activity as MainActivity)).get(ModalViewModel::class.java)
 
         butMeetingReq.setOnClickListener {
-            modalViewmodel.setModalState(ModalViewModel.ModalState.REQUEST_MEETING)
+            val fragmentManager =  requireActivity().supportFragmentManager
+            val newFragment = RequestMeetingFragment()
+            newFragment.show(fragmentManager, "dialog")
+
         }
 
     }
