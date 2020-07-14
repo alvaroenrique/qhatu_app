@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modal_border"
+        android:paddingLeft="21dp"
+        android:paddingTop="30dp"
+        android:paddingRight="21dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/relaMeetingDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/teviMeetingDate"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_meeting_date"
+                android:textAppearance="@style/modal_field_text" />
+
+            <Spinner
+                android:id="@+id/spiMeetingDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:entries="@array/meeting_dates"
+                android:gravity="end"
+                android:textAlignment="textEnd" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iviMeetingDate"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/relaMeetingDate"
+            android:background="#000000" />
+
+        <RelativeLayout
+            android:id="@+id/relaMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iviMeetingDate"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/teviMedium"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/dialog_meeting_medium"
+                android:textAppearance="@style/modal_field_text" />
+
+            <Spinner
+                android:id="@+id/spiMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:entries="@array/mediums"
+                android:gravity="end"
+                android:textAlignment="textEnd" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iviMedium"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/relaMedium"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/teviAdvice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iviMedium"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/dialog_meeting_advice" />
+
+        <Button
+            android:id="@+id/butRequestMeeting"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/teviAdvice"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/second_button"
+            android:text="@string/dialog_request_meeting_button"
+            android:textAppearance="@style/button_text" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/requestMeetingCloseIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
