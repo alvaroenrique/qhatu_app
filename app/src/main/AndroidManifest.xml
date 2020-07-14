@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.mainflow.activities.MainActivity">
+
         </activity>
     </application>
 

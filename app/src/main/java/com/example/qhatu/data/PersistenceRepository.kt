@@ -2,7 +2,6 @@ package com.example.qhatu.data
 
 import android.content.Context
 import android.util.Log
-import androidx.room.Room
 import com.example.qhatu.ui.model.User
 import java.lang.Exception
 

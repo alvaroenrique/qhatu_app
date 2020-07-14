@@ -21,8 +21,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ProgressBar
+            android:id="@+id/profilePictureProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/profileChangePhotoField"
             style="@style/change_profile_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +49,7 @@
             android:background="@drawable/border_top"
             android:paddingHorizontal="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView">
+            app:layout_constraintTop_toBottomOf="@id/profileChangePhotoField">
 
             <TextView
                 style="@style/profile_field"
@@ -60,7 +69,7 @@
                 app:layout_constraintWidth_percent="0.7">
 
                 <com.google.android.material.textfield.TextInputEditText
-
+                    android:id="@+id/profileNameInput"
                     style="@style/profile_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,6 +105,7 @@
                 app:layout_constraintWidth_percent="0.7">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileLastNameInput"
                     style="@style/profile_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,6 +141,7 @@
                 app:layout_constraintWidth_percent="0.7">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profilePhoneInput"
                     style="@style/profile_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -166,6 +177,7 @@
                 app:layout_constraintWidth_percent="0.7">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileEmailInput"
                     style="@style/profile_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -195,6 +207,7 @@
                 app:layout_constraintWidth_percent="0.3" />
 
             <TextView
+                android:id="@+id/profileDirectionField"
                 style="@style/profile_field"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -207,7 +220,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RelativeLayout
-            android:id="@+id/listLink"
+            android:id="@+id/profilePurchaseListLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
@@ -217,6 +230,7 @@
             app:layout_constraintTop_toBottomOf="@id/constDirection">
 
             <TextView
+                android:id="@+id/tviListaCompras"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -238,7 +252,20 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/butMeetingReq"
+            android:id="@+id/profileButtonUpdateData"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/blue_button"
+            android:text="@string/profile_button_update"
+            android:textAppearance="@style/button_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilePurchaseListLink" />
+
+        <Button
+            android:id="@+id/profileButtonCloseSession"
             android:layout_width="180dp"
             android:layout_height="30dp"
             android:layout_marginTop="30dp"
@@ -249,7 +276,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listLink" />
+            app:layout_constraintTop_toBottomOf="@+id/profileButtonUpdateData" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

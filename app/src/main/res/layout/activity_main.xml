@@ -55,6 +55,31 @@
             app:navGraph="@navigation/main_nav"
             tools:ignore="FragmentTagUsage" />
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/modalConstraint"
+        android:background="#99000000"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutToolBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/modalFrameLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_request_meeting" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -68,5 +93,7 @@
         app:itemTextColor="@color/coloWhite"
         app:menu="@menu/drawer_menu"
         app:theme="@style/NavigationDrawerStyle" />
+
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

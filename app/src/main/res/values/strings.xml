@@ -110,15 +110,15 @@
     <string name="duo_car_plate">Placa de carro</string>
     <string name="duo_car_plate_text">HVC-21D</string>
     <string name="user_names">Nombres</string>
-    <string name="user_names_text">Luis Eduardo Ricardo</string>
+    <string name="user_names_text"></string>
     <string name="user_surname">Apellidos</string>
-    <string name="user_surname_text">Rivera Diaz</string>
+    <string name="user_surname_text"></string>
     <string name="user_phone">Celular</string>
-    <string name="user_phone_text">987420884</string>
+    <string name="user_phone_text"></string>
     <string name="user_mail">Email</string>
-    <string name="user_mail_text">luisriveradiaz1699@gmail.com</string>
+    <string name="user_mail_text"></string>
     <string name="user_address">Dirección</string>
-    <string name="user_address_text">Jr. Mariscal Ramon Castilla 783 Edificio H Dpto 501</string>
+    <string name="user_address_text"></string>
     <string name="user_purchase_list">Mi lista de compras</string>
     <string name="signout_button">Cerrar Sesión</string>
     <string name="historic_purchases">Pedidos Historicos</string>
@@ -127,4 +127,5 @@
     <string name="item_purchase_historic_date">10 de marzo a las 9:00am</string>
     <string name="item_product_name">1 leche gloria de 1L</string>
     <string name="register_message">Para poder registrarte debes haber hecho por lo menos una compra con nosotros. Si lo deseas hacer, por favor ponte en contacto con nosotros en qhatu-peru.pe</string>
+    <string name="profile_button_update">Actualizar Datos</string>
 </resources>
