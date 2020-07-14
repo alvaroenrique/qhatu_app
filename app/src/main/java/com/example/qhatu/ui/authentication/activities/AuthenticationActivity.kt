@@ -10,16 +10,18 @@ import com.example.qhatu.R
 import com.example.qhatu.ui.authentication.fragments.LoginFragment
 import com.example.qhatu.ui.authentication.fragments.RegisterFragment
 import com.example.qhatu.ui.authentication.interfaces.OnChangeAuthenticationMode
+import com.example.qhatu.ui.authentication.interfaces.OnLogin
 import com.example.qhatu.ui.authentication.interfaces.OnRegisterRequest
 import com.example.qhatu.ui.mainflow.activities.MainActivity
 import com.example.qhatu.ui.model.User
 import com.example.qhatu.viewmodel.AuthenticationViewModel
 import com.example.qhatu.viewmodel.FormValidatorViewModel
 
-class AuthenticationActivity : AppCompatActivity(), OnChangeAuthenticationMode, OnRegisterRequest {
+class AuthenticationActivity : AppCompatActivity(), OnChangeAuthenticationMode, OnRegisterRequest,
+    OnLogin {
 
-    private var formValidatorViewModel : FormValidatorViewModel? = null
-    private var authenticationViewModel : AuthenticationViewModel? = null
+    private var formValidatorViewModel: FormValidatorViewModel? = null
+    private var authenticationViewModel: AuthenticationViewModel? = null
 
     private var fraLogin: Fragment? = null
     private var fraRegister: Fragment? = null
@@ -29,6 +31,7 @@ class AuthenticationActivity : AppCompatActivity(), OnChangeAuthenticationMode, 
         setContentView(R.layout.activity_authentication)
         setUpFormValidatorViewModel()
         setUpAuthenticationViewModel()
+        authenticationViewModel!!.checkIfLogged()
 
         fraLogin = LoginFragment()
 
@@ -37,23 +40,23 @@ class AuthenticationActivity : AppCompatActivity(), OnChangeAuthenticationMode, 
         ft.commit()
     }
 
-    fun setUpFormValidatorViewModel(){
+    fun setUpFormValidatorViewModel() {
         formValidatorViewModel = FormValidatorViewModel()
     }
 
-    fun setUpAuthenticationViewModel(){
+    fun setUpAuthenticationViewModel() {
         authenticationViewModel = AuthenticationViewModel()
-        val authenticationObserver = Observer<User>{
-            if (it.isAuthenticated){
+        val authenticationObserver = Observer<User> {
+            if (it.isAuthenticated) {
                 Log.d("AuthenticationLog::", "Ya podemos ir a loggearnos")
                 createUserDocInFirestore {
-                    if (it){
-                        //goToMainActivity()
-                    }else{
+                    if (it) {
+                        goToMainActivity()
+                    } else {
                         TODO("Hacer algo para que se cree despues")
                     }
                 }
-            }else{
+            } else {
                 Log.d("AuthenticationLog::", "Not yet authenticated")
             }
         }
@@ -80,12 +83,12 @@ class AuthenticationActivity : AppCompatActivity(), OnChangeAuthenticationMode, 
         password: String,
         passwordConf: String,
         DNI: String
-    ) : Boolean {
+    ): Boolean {
         // Validando los campos de formulario
-        if(formValidatorViewModel!!.validateForm(email, password, passwordConf, DNI)){
+        if (formValidatorViewModel!!.validateForm(email, password, passwordConf, DNI)) {
             Log.d("FormValidatorLog::", "Approved")
             return true
-        } else{
+        } else {
             Log.d("FormValidatorLog::", "Disapproved")
             return false
         }
@@ -103,7 +106,15 @@ class AuthenticationActivity : AppCompatActivity(), OnChangeAuthenticationMode, 
         authenticationViewModel!!.createUserWithEmailAndPassword(email, password, block)
     }
 
-    fun createUserDocInFirestore(block: (done: Boolean) -> Unit){
+    fun createUserDocInFirestore(block: (done: Boolean) -> Unit) {
         authenticationViewModel!!.createUserDocInFirestore(block)
+    }
+
+    override fun logInWithEmailAndPassword(
+        email: String,
+        password: String,
+        block: (success: Boolean) -> Unit
+    ) {
+        authenticationViewModel!!.logInWithEmailAndPassword(email, password, block)
     }
 }

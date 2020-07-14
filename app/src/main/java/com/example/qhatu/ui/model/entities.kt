@@ -1,5 +1,6 @@
 package com.example.qhatu.ui.model
 
+import androidx.room.*
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import java.util.*
@@ -9,7 +10,7 @@ data class User(
     var email: String? = null,
     var isAuthenticated: Boolean = false,
     var userInfo : UserInfo? = null,
-    var userReference : String? = null,
+    var userReference : DocumentReference? = null,
     var userDocumentId : String? = null
 )
 

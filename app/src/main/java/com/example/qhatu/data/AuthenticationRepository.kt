@@ -2,7 +2,9 @@ package com.example.qhatu.data
 
 import android.util.Log
 import com.example.qhatu.ui.model.User
+import com.example.qhatu.ui.model.UserInfo
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import java.lang.Exception
 import java.lang.reflect.Executable
@@ -42,6 +44,7 @@ class AuthenticationRepository {
         }
     }
 
+    // Crea usuario en collection users de firestore con referencia al active customer
     fun firebaseCreateUserDocInFirestore(user: User, block: (done: Boolean) -> Unit) {
         val userRef = hashMapOf(
             "customer" to user.userReference
@@ -54,6 +57,49 @@ class AuthenticationRepository {
             }
     }
 
+    // Login with email and password
+    fun firebaseLogInWithEmailAndPassword(
+        email: String,
+        password: String,
+        blockVM: (user: User) -> Unit,
+        block: (success: Boolean) -> Unit
+    ) {
+        mauth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
+            val user = User(it.user?.uid, it.user?.email, true)
+            Log.d("LoginLog::", "Loggeado")
+            blockVM(user)
+            block(true)
+        }.addOnFailureListener {
+            Log.d("LoginLog::", "No Loggeado")
+            block(false)
+        }
+    }
+
+    fun checkIfLogged(): String? {
+        return mauth.currentUser?.uid
+    }
+
+    fun getUserInformation(uid:String, block: (user: User) -> Unit){
+        mDatabaseReference.collection("users").document(uid).get().addOnSuccessListener {
+            if (it!=null){
+                val customerReference = it["customer"] as DocumentReference
+                Log.d("CheckedLog::", "Found")
+                customerReference.get().addOnSuccessListener {
+                    val newUser = User()
+                    val uInfo = it.toObject(UserInfo::class.java)!!
+                    newUser.userInfo = uInfo
+                    newUser.email = uInfo.mail
+                    newUser.userDocumentId = it.id
+                    newUser.userReference = it.reference
+                    block(newUser)
+                }
+            }
+        }.addOnFailureListener {
+            Log.d("CheckedLog::", "No se obtuvo nada")
+        }
+    }
+
+    // Deslogeado
     fun firebaseSignOut(): Boolean {
         try {
             mauth.signOut()

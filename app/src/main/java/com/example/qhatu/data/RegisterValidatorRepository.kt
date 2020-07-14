@@ -9,6 +9,7 @@ class RegisterValidatorRepository {
 
     private val databaseReference = FirebaseFirestore.getInstance()
 
+    // Valida de DNI e Email esten en un documento de activecustomers
     fun firebaseValidateExistenceInActiveCustomers(
         DNI: String,
         email: String,
@@ -22,7 +23,7 @@ class RegisterValidatorRepository {
                 if (!it.isEmpty) {
                     val activeCustomerDoc = it.documents[0]
                     val activeCustomerDocID = it.documents[0].id
-                    val activeCustomerDocRef = it.documents[0].reference.path
+                    val activeCustomerDocRef = it.documents[0].reference
                     Log.d("ActiveCustomerLog::", activeCustomerDoc.toString())
                     Log.d("ActiveCustomerLog::", activeCustomerDocID)
                     Log.d("ActiveCustomerLog::", activeCustomerDocRef.toString())
@@ -31,17 +32,18 @@ class RegisterValidatorRepository {
                         userDocumentId = activeCustomerDocID,
                         userReference = activeCustomerDocRef
                     )
-                    block(true)
+                    Log.d("ActiveCustomerLog::", user.toString())
                     blockVM(user)
+                    block(true)
                 } else {
                     Log.d("ActiveCustomerLog::", "No existe usuario en Active Customer Collection")
-                    block(false)
                     blockVM(User())
+                    block(false)
                 }
             }.addOnFailureListener {
                 Log.d("ActiveCustomerLog::", it.message!!)
-                block(false)
                 blockVM(User())
+                block(false)
             }
     }
 

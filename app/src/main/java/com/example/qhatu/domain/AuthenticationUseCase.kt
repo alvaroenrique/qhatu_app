@@ -1,12 +1,20 @@
 package com.example.qhatu.domain
 
+import android.util.Log
 import com.example.qhatu.data.AuthenticationRepository
+import com.example.qhatu.data.PersistenceRepository
+import com.example.qhatu.ui.authentication.activities.AuthenticationActivity
 import com.example.qhatu.ui.model.User
+import com.example.qhatu.ui.model.UserInfo
+import java.util.*
 
 class AuthenticationUseCase {
 
     // Se inicializa el repositorio a utilizar
     val authenticationRepository = AuthenticationRepository()
+    //val persistenceRepository = PersistenceRepository()
+
+    //val persistenceUseCase = PersistenceUseCase()
 
     // Se declaran los metodos del caso de uso que retornan lo que retornan las funciones del repositorio inicializado
 
@@ -27,7 +35,32 @@ class AuthenticationUseCase {
         )
     }
 
-    fun createUserDocInFirestore(user:User, block:(done:Boolean)->Unit){
+    fun createUserDocInFirestore(user: User, block: (done: Boolean) -> Unit) {
         authenticationRepository.firebaseCreateUserDocInFirestore(user, block)
+    }
+
+    fun loginWithEmailAndPassword(
+        email: String,
+        password: String,
+        block: (success: Boolean) -> Unit,
+        blockVM: (user: User) -> Unit
+    ) {
+        authenticationRepository.firebaseLogInWithEmailAndPassword(email, password, blockVM, block)
+    }
+
+    fun checkIfLogged(block: (user: User) -> Unit) {
+        val uid = authenticationRepository.checkIfLogged()
+        if (uid!=null){
+            getUserInformation(uid){
+                val user = it
+                user.uid = uid
+                user.isAuthenticated = true
+                block(user)
+            }
+        }
+    }
+
+    fun getUserInformation(uid:String, block:(user:User)->Unit){
+        authenticationRepository.getUserInformation(uid, block)
     }
 }

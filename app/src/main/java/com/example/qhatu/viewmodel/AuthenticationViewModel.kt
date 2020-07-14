@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.qhatu.domain.AuthenticationUseCase
+import com.example.qhatu.domain.PersistenceUseCase
 import com.example.qhatu.domain.ValidateNewUserUseCase
 import com.example.qhatu.ui.model.User
 
@@ -14,6 +15,7 @@ class AuthenticationViewModel : ViewModel() {
     // Setear use cases
     val validateNewUserUseCase = ValidateNewUserUseCase()
     val authenticationUseCase = AuthenticationUseCase()
+    val persistenceUseCase = PersistenceUseCase()
 
     // Setear Mutable Live Data
     private val userLiveData = MutableLiveData<User>()
@@ -47,8 +49,26 @@ class AuthenticationViewModel : ViewModel() {
         })
     }
 
-    fun createUserDocInFirestore(block: (done: Boolean) -> Unit){
-       authenticationUseCase.createUserDocInFirestore(userLiveData.value!!, block)
+    fun createUserDocInFirestore(block: (done: Boolean) -> Unit) {
+        authenticationUseCase.createUserDocInFirestore(userLiveData.value!!, block)
+    }
+
+    fun logInWithEmailAndPassword(
+        email: String,
+        password: String,
+        block: (success: Boolean) -> Unit
+    ) {
+        authenticationUseCase.loginWithEmailAndPassword(email, password, block) {
+            setUser(it)
+            Log.d("LoginLOG::", it.toString())
+        }
+    }
+
+    fun checkIfLogged(){
+        authenticationUseCase.checkIfLogged {
+            setUser(it)
+            Log.d("CheckedLOG::", it.toString())
+        }
     }
 
     // Reaccionar al cambio
