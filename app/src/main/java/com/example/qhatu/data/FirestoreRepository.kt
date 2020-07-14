@@ -16,4 +16,10 @@ class FirestoreRepository {
         return db.collection("meeting-dates")
     }
 
+    fun getProductCategoryRef(productId: String?): DocumentReference {
+        if (productId != null) {
+            return db.collection("product-categories").document(productId)
+        }
+        return db.collection("product-categories").document("")
+    }
 }

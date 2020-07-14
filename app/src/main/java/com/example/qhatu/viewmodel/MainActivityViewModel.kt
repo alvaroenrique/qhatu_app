@@ -19,6 +19,10 @@ class MainActivityViewModel: ViewModel() {
 
     private var uid = MutableLiveData<String>()
 
+    private var addIconVisible = MutableLiveData<Boolean>()
+
+    private var currentProductId = MutableLiveData<String>()
+
     // Setters de mutable data
     fun setUser(newUser: UserInfo) {
         user.value = newUser
@@ -41,6 +45,20 @@ class MainActivityViewModel: ViewModel() {
     }
     fun setUid(newUid:String?) {
         uid.value = newUid
+    }
+
+    fun getAddIconVisible(): MutableLiveData<Boolean> {
+        return addIconVisible
+    }
+    fun setAddIconVisible(newState: Boolean) {
+        addIconVisible.value = newState
+    }
+
+    fun getCurrentProductId(): MutableLiveData<String> {
+        return currentProductId
+    }
+    fun setCurrentProductId(newProductId: String) {
+        currentProductId.value = newProductId
     }
 
     // Llamada a las funciones de los casos de uso

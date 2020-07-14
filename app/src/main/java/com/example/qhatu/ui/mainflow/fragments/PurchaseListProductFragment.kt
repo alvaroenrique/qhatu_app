@@ -1,6 +1,7 @@
 package com.example.qhatu.ui.mainflow.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +9,19 @@ import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.qhatu.R
 import com.example.qhatu.ui.mainflow.activities.MainActivity
+import com.example.qhatu.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.fragment_add_product_dialog.*
 
 class PurchaseListProductFragment : Fragment(){
     private var teviPLProdTitle : TextView? = null
     private var mListarProductos : ListView? = null
+
+    private lateinit var model: MainActivityViewModel
 
     val args :PurchaseListProductFragmentArgs by navArgs()
     override fun onCreateView(
@@ -51,6 +57,16 @@ class PurchaseListProductFragment : Fragment(){
 
         }
 
+        model = ViewModelProvider((activity as MainActivity)).get(MainActivityViewModel::class.java)
+        model.setAddIconVisible(true)
 
+        model.setCurrentProductId(args.id)
+
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+
+        model.setAddIconVisible(false)
     }
 }

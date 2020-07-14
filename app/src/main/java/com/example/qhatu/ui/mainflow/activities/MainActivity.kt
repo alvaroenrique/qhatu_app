@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ListView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -21,9 +22,13 @@ import com.example.qhatu.model.Categorias
 import com.example.qhatu.model.ListadoComprasManager
 import com.example.qhatu.model.ListadoProductoManager
 import com.example.qhatu.model.Producto
+import com.example.qhatu.ui.mainflow.fragments.AddProductDialogFragment
+import com.example.qhatu.ui.mainflow.fragments.RequestMeetingFragment
+import com.example.qhatu.ui.model.UserInfo
 import com.example.qhatu.viewmodel.AuthenticationViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -70,9 +75,7 @@ class MainActivity : AppCompatActivity() {
         profileUserCase.setUserData()
 
 
-
-        Log.i("usurrrrrrr", authViewModel.getUserLiveData().value?.uid.toString())
-
+        initAddButton()
 
     }
 
@@ -105,5 +108,21 @@ class MainActivity : AppCompatActivity() {
         } else {
             drawerLayout.openDrawer(GravityCompat.START)
         }
+    }
+
+    fun initAddButton() {
+        iconAdd.setOnClickListener {
+            val fragmentManager =  supportFragmentManager
+            val newFragment = AddProductDialogFragment()
+            newFragment.show(fragmentManager, "dialog")
+        }
+
+        mainActivityViewmodel.getAddIconVisible().observe(this, Observer<Boolean> { newState ->
+            if (newState) {
+                iconAdd.visibility = View.VISIBLE
+            } else {
+                iconAdd.visibility = View.GONE
+            }
+        })
     }
 }
