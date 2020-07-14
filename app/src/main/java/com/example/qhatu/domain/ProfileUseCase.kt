@@ -2,25 +2,32 @@ package com.example.qhatu.domain
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
 import android.widget.Toast
 import com.example.qhatu.data.FirestoreRepository
-import com.example.qhatu.ui.model.User
 import com.example.qhatu.ui.model.UserInfo
 import com.example.qhatu.viewmodel.MainActivityViewModel
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
-class ProfileUseCase(private val model: MainActivityViewModel, private val context: Context) {
+class ProfileUseCase(
+    private val model: MainActivityViewModel,
+    private val context: Context
+) {
 
     private val fireStoreRepository = FirestoreRepository()
 
     private val userId = model.getUid().value
 
+    private lateinit var dfaultImg:Bitmap
+
     fun setUserData() {
         setCturrentUser()
         setCurrentUserPicture()
+    }
+
+    fun defaultPicture(newPicture: Bitmap) {
+        dfaultImg = newPicture
     }
 
     private fun setCturrentUser() {
@@ -53,7 +60,9 @@ class ProfileUseCase(private val model: MainActivityViewModel, private val conte
                 }
             }
             .addOnFailureListener {
-                Log.i("Error", "No existe imagen")
+                if (dfaultImg != null) {
+                    uploadImageAndSaveUri(dfaultImg)
+                }
             }
     }
 
@@ -74,6 +83,8 @@ class ProfileUseCase(private val model: MainActivityViewModel, private val conte
                         model.setUserPicture(it)
 
                     }
+                }.addOnFailureListener {
+
                 }
             }
         }

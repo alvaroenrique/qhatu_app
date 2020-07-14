@@ -1,5 +1,6 @@
 package com.example.qhatu.ui.mainflow.activities
 
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,12 +24,9 @@ import com.example.qhatu.model.ListadoComprasManager
 import com.example.qhatu.model.ListadoProductoManager
 import com.example.qhatu.model.Producto
 import com.example.qhatu.ui.mainflow.fragments.AddProductDialogFragment
-import com.example.qhatu.ui.mainflow.fragments.RequestMeetingFragment
-import com.example.qhatu.ui.model.UserInfo
 import com.example.qhatu.viewmodel.AuthenticationViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -72,6 +70,9 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewmodel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         mainActivityViewmodel.setUid(authViewModel.getUserLiveData().value?.uid)
         profileUserCase = ProfileUseCase(mainActivityViewmodel, this)
+        profileUserCase.defaultPicture(BitmapFactory.decodeResource(
+            resources,
+            R.drawable.bg_menu_dark))
         profileUserCase.setUserData()
 
 
