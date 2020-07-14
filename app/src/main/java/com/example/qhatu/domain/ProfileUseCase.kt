@@ -2,6 +2,7 @@ package com.example.qhatu.domain
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import android.widget.Toast
 import com.example.qhatu.data.FirestoreRepository
 import com.example.qhatu.ui.model.User
@@ -15,7 +16,7 @@ class ProfileUseCase(private val model: MainActivityViewModel, private val conte
 
     private val fireStoreRepository = FirestoreRepository()
 
-    private val userId = "8HweNAVEWwkeKjru0CZH"
+    private val userId = model.getUid().value
 
     fun setUserData() {
         setCturrentUser()
@@ -23,20 +24,22 @@ class ProfileUseCase(private val model: MainActivityViewModel, private val conte
     }
 
     private fun setCturrentUser() {
-        fireStoreRepository.getUserRefById(userId)
-            .get()
-            .addOnSuccessListener { result ->
-                result
-                val userData: DocumentReference? = result.data?.get("customer") as DocumentReference
-                userData?.get()?.addOnSuccessListener { res ->
-                    val customerUserData: UserInfo? = res.toObject(UserInfo::class.java)
+        if (userId != null) {
+            fireStoreRepository.getUserRefById(userId)
+                .get()
+                .addOnSuccessListener { result ->
+                    result
+                    val userData: DocumentReference? = result.data?.get("customer") as DocumentReference
+                    userData?.get()?.addOnSuccessListener { res ->
+                        val customerUserData: UserInfo? = res.toObject(UserInfo::class.java)
 
-                    if (customerUserData != null) {
-                        model.setUser(customerUserData)
+                        if (customerUserData != null) {
+                            model.setUser(customerUserData)
+                        }
+
                     }
-
                 }
-            }
+        }
     }
 
     private fun setCurrentUserPicture() {
@@ -45,9 +48,12 @@ class ProfileUseCase(private val model: MainActivityViewModel, private val conte
             .child("pics/${userId}")
             .downloadUrl
             .addOnCompleteListener { urlTask ->
-                urlTask.result?.let {
-                    model.setUserPicture(it)
+                urlTask.addOnSuccessListener {
+                        model.setUserPicture(it)
                 }
+            }
+            .addOnFailureListener {
+                Log.i("Error", "No existe imagen")
             }
     }
 
@@ -80,42 +86,44 @@ class ProfileUseCase(private val model: MainActivityViewModel, private val conte
         newPhone: Long,
         newEmail: String
     ) {
-        fireStoreRepository.getUserRefById(userId)
-            .get()
-            .addOnSuccessListener { result ->
-                result
-                val userData: DocumentReference? = result.data?.get("customer") as DocumentReference
-                userData?.update(
-                    mapOf(
-                        "nombre" to newName,
-                        "apellidos" to newLastName,
-                        "celular" to newPhone,
-                        "mail" to newEmail
-                    )
-                )?.addOnSuccessListener {
-                    val currentUser: UserInfo? = model.getUser().value
-                    if (currentUser != null) {
-                        currentUser.nombre = newName
-                        currentUser.apellidos = newLastName
-                        currentUser.celular = newPhone
-                        currentUser.mail = newEmail
+        if (userId != null) {
+            fireStoreRepository.getUserRefById(userId)
+                .get()
+                .addOnSuccessListener { result ->
+                    result
+                    val userData: DocumentReference? = result.data?.get("customer") as DocumentReference
+                    userData?.update(
+                        mapOf(
+                            "nombre" to newName,
+                            "apellidos" to newLastName,
+                            "celular" to newPhone,
+                            "mail" to newEmail
+                        )
+                    )?.addOnSuccessListener {
+                        val currentUser: UserInfo? = model.getUser().value
+                        if (currentUser != null) {
+                            currentUser.nombre = newName
+                            currentUser.apellidos = newLastName
+                            currentUser.celular = newPhone
+                            currentUser.mail = newEmail
 
-                        model.setUser(currentUser)
+                            model.setUser(currentUser)
+                        }
+                        Toast.makeText(
+                            context,
+                            "Los datos fueron actualizados correctamente",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
+                }
+                .addOnFailureListener {
                     Toast.makeText(
                         context,
-                        "Los datos fueron actualizados correctamente",
+                        "Ha ocurrido un error",
                         Toast.LENGTH_LONG
                     ).show()
                 }
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    context,
-                    "Ha ocurrido un error",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+        }
 
     }
 

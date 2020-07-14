@@ -34,4 +34,16 @@ class RequestMeetingViewModel: ViewModel() {
                 dateMeetings.value = newDateMeetings
             }
     }
+
+    fun setMeetingById(id: String?, uid: String?, medio: String) {
+        if (id != null && uid != null) {
+            fireStoreRep.getMeetingDatesRef().document(id).update(mapOf(
+                "user" to fireStoreRep.getUserRefById(uid),
+                "available" to false,
+                "medio" to medio
+            ))
+        }
+    }
+
+
 }

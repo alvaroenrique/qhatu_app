@@ -21,6 +21,7 @@ import com.example.qhatu.model.Categorias
 import com.example.qhatu.model.ListadoComprasManager
 import com.example.qhatu.model.ListadoProductoManager
 import com.example.qhatu.model.Producto
+import com.example.qhatu.viewmodel.AuthenticationViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -40,9 +41,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var profileUserCase: ProfileUseCase
 
+    private lateinit var authViewModel: AuthenticationViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        authViewModel = ViewModelProvider(this).get(AuthenticationViewModel::class.java)
 
         navController = findNavController(R.id.fragment)
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -60,11 +65,13 @@ class MainActivity : AppCompatActivity() {
         )
 
         mainActivityViewmodel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        mainActivityViewmodel.setUid(authViewModel.getUserLiveData().value?.uid)
         profileUserCase = ProfileUseCase(mainActivityViewmodel, this)
         profileUserCase.setUserData()
 
 
 
+        Log.i("usurrrrrrr", authViewModel.getUserLiveData().value?.uid.toString())
 
 
     }

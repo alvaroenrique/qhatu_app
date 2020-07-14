@@ -17,6 +17,8 @@ class MainActivityViewModel: ViewModel() {
 
     private var userPicture = MutableLiveData<Uri>()
 
+    private var uid = MutableLiveData<String>()
+
     // Setters de mutable data
     fun setUser(newUser: UserInfo) {
         user.value = newUser
@@ -32,6 +34,13 @@ class MainActivityViewModel: ViewModel() {
 
     fun getUserPicture(): LiveData<Uri> {
         return userPicture
+    }
+
+    fun getUid(): MutableLiveData<String> {
+        return uid
+    }
+    fun setUid(newUid:String?) {
+        uid.value = newUid
     }
 
     // Llamada a las funciones de los casos de uso

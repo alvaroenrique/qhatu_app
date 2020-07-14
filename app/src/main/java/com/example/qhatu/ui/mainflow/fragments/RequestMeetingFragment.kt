@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.qhatu.R
 import com.example.qhatu.ui.mainflow.activities.MainActivity
 import com.example.qhatu.ui.model.Meeting
+import com.example.qhatu.viewmodel.MainActivityViewModel
 import com.example.qhatu.viewmodel.RequestMeetingViewModel
 import kotlinx.android.synthetic.main.fragment_request_meeting.*
 import java.text.SimpleDateFormat
@@ -25,6 +26,7 @@ import java.util.*
 class RequestMeetingFragment : DialogFragment() {
 
     private lateinit var model: RequestMeetingViewModel
+    private lateinit var viewModel: MainActivityViewModel
 
     /** The system calls this to get the DialogFragment's layout, regardless
     of whether it's being displayed as a dialog or an embedded fragment. */
@@ -44,6 +46,9 @@ class RequestMeetingFragment : DialogFragment() {
             dialog?.dismiss()
         }
 
+        viewModel =
+            ViewModelProvider((activity as MainActivity)).get(MainActivityViewModel::class.java)
+
         model =
             ViewModelProvider((activity as MainActivity)).get(RequestMeetingViewModel::class.java)
 
@@ -53,7 +58,6 @@ class RequestMeetingFragment : DialogFragment() {
 
         model.getDateMeetings()
             .observe(viewLifecycleOwner, Observer<MutableList<Meeting>> { newDateMeeting ->
-                Log.i("111111111", newDateMeeting.map { it -> it.date }.toString())
 
                 val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.US)
                 val formatedMeeting = newDateMeeting.map {
@@ -70,9 +74,13 @@ class RequestMeetingFragment : DialogFragment() {
             })
 
         butRequestMeeting.setOnClickListener {
-            Log.i("aaaaaaaaaa", model.getDateMeetings().value?.get(spiMeetingDate.selectedItemPosition)?.id)
+            model.setMeetingById(
+                model.getDateMeetings().value?.get(spiMeetingDate.selectedItemPosition)?.id,
+                viewModel.getUid().value,
+                spiMedium.selectedItem.toString()
+            )
+            dialog?.dismiss()
         }
-
 
 
     }
