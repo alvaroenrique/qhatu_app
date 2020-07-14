@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ListView
+import androidx.navigation.Navigation
 //import androidx.lifecycle.ViewModelProviders
 import com.example.qhatu.R
+import com.example.qhatu.ui.mainflow.activities.MainActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,6 +23,8 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class PurchaseListFragment : Fragment() {
+    private var mlistarCategorias : ListView? = null
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -41,6 +47,25 @@ class PurchaseListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity_instance = activity as MainActivity
+
+        mlistarCategorias = view.findViewById(R.id.liviPL)
+
+        activity_instance.ListarCategorias()
+
+        mlistarCategorias?.setOnItemClickListener() { parent : AdapterView<*>, view:View, position:Int, id:Long ->
+
+            val data = parent.adapter.getItem(position).toString()
+            val yourArray: List<String> = data.split(",")
+
+            val nombre = yourArray[0]
+            val id = yourArray[1]
+
+            val action = PurchaseListFragmentDirections.actionPurchaseListFragmentToPurchaseListProductFragment(nombre,id)
+            Navigation.findNavController(view).navigate(action)
+
+        }
 
         /*val model = ViewModelProviders.of((activity as MainActivity)).get(MainActivityViewModel::class.java)
 

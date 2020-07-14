@@ -217,6 +217,7 @@
             app:layout_constraintTop_toBottomOf="@id/constDirection">
 
             <TextView
+                android:id="@+id/tviListaCompras"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
