@@ -45,13 +45,23 @@ class AuthenticationUseCase {
         block: (success: Boolean) -> Unit,
         blockVM: (user: User) -> Unit
     ) {
-        authenticationRepository.firebaseLogInWithEmailAndPassword(email, password, blockVM, block)
+        authenticationRepository.firebaseLogInWithEmailAndPassword(email, password, {it1->
+            if (it1.uid!=null){
+                getUserInformation(it1.uid!!){
+                    val user = it
+                    user.uid = it1.uid!!
+                    user.isAuthenticated = true
+                    user.isCreated = false
+                    blockVM(user)
+                }
+            }
+        }, block)
     }
 
     fun checkIfLogged(block: (user: User) -> Unit) {
         val uid = authenticationRepository.checkIfLogged()
-        if (uid!=null){
-            getUserInformation(uid){
+        if (uid != null) {
+            getUserInformation(uid) {
                 val user = it
                 user.uid = uid
                 user.isAuthenticated = true
@@ -60,7 +70,7 @@ class AuthenticationUseCase {
         }
     }
 
-    fun getUserInformation(uid:String, block:(user:User)->Unit){
+    fun getUserInformation(uid: String, block: (user: User) -> Unit) {
         authenticationRepository.getUserInformation(uid, block)
     }
 }

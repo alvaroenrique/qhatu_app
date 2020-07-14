@@ -47,15 +47,18 @@ class AuthenticationActivity : AppCompatActivity(), OnChangeAuthenticationMode, 
     fun setUpAuthenticationViewModel() {
         authenticationViewModel = AuthenticationViewModel()
         val authenticationObserver = Observer<User> {
-            if (it.isAuthenticated) {
-                Log.d("AuthenticationLog::", "Ya podemos ir a loggearnos")
+            if(it.isCreated){
                 createUserDocInFirestore {
                     if (it) {
-                        goToMainActivity()
+                        Log.d("AuthenticationLog::", "Created in firestore")
                     } else {
                         TODO("Hacer algo para que se cree despues")
                     }
                 }
+            }
+            if (it.isAuthenticated) {
+                Log.d("AuthenticationLog::", "Ya podemos ir a loggearnos")
+                goToMainActivity()
             } else {
                 Log.d("AuthenticationLog::", "Not yet authenticated")
             }

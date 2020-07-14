@@ -8,6 +8,7 @@ data class User(
     var uid: String? = null,
     var email: String? = null,
     var isAuthenticated: Boolean = false,
+    var isCreated: Boolean = false,
     var userInfo : UserInfo? = null,
     var userReference : DocumentReference? = null,
     var userDocumentId : String? = null

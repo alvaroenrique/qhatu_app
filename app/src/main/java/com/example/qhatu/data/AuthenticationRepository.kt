@@ -30,6 +30,7 @@ class AuthenticationRepository {
             if (firebaseUser != null) {
                 user.uid = firebaseUser.uid
                 user.email = firebaseUser.email
+                user.isCreated = true
                 user.isAuthenticated = true
                 block(user)
                 Log.d("SignUpLog::", "User Created")
@@ -65,7 +66,7 @@ class AuthenticationRepository {
         block: (success: Boolean) -> Unit
     ) {
         mauth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
-            val user = User(it.user?.uid, it.user?.email, true)
+            val user = User(it.user?.uid, it.user?.email, true, isCreated = false)
             Log.d("LoginLog::", "Loggeado")
             blockVM(user)
             block(true)
@@ -82,6 +83,8 @@ class AuthenticationRepository {
     fun getUserInformation(uid:String, block: (user: User) -> Unit){
         mDatabaseReference.collection("users").document(uid).get().addOnSuccessListener {
             if (it!=null){
+                Log.d("CheckedLog::", uid.toString())
+                Log.d("CheckedLog::", it["customer"].toString())
                 val customerReference = it["customer"] as DocumentReference
                 Log.d("CheckedLog::", "Found")
                 customerReference.get().addOnSuccessListener {
