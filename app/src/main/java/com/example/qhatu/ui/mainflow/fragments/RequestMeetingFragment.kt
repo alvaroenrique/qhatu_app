@@ -2,10 +2,13 @@ package com.example.qhatu.ui.mainflow.fragments
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
@@ -13,10 +16,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.qhatu.R
 import com.example.qhatu.ui.mainflow.activities.MainActivity
 import com.example.qhatu.ui.model.Meeting
-import com.example.qhatu.ui.model.UserInfo
 import com.example.qhatu.viewmodel.RequestMeetingViewModel
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_request_meeting.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class RequestMeetingFragment : DialogFragment() {
@@ -41,19 +44,35 @@ class RequestMeetingFragment : DialogFragment() {
             dialog?.dismiss()
         }
 
-        model = ViewModelProvider((activity as MainActivity)).get(RequestMeetingViewModel::class.java)
+        model =
+            ViewModelProvider((activity as MainActivity)).get(RequestMeetingViewModel::class.java)
 
         model.setMeetingDateList()
 
 
 
-        model.getDateMeetings().observe(viewLifecycleOwner, Observer<MutableList<String>> { newDateMeeting ->
-            var arr = mutableListOf<String>("asd", "123123")
+        model.getDateMeetings()
+            .observe(viewLifecycleOwner, Observer<MutableList<Meeting>> { newDateMeeting ->
+                Log.i("111111111", newDateMeeting.map { it -> it.date }.toString())
 
-            val array_adapter = ArrayAdapter((activity as MainActivity), android.R.layout.simple_spinner_item, newDateMeeting)
-            array_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spiMeetingDate.adapter = array_adapter
-        })
+                val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.US)
+                val formatedMeeting = newDateMeeting.map {
+                    sfd.format(it.date.toDate().time - 3600 * 5000)
+                }
+
+                val array_adapter = ArrayAdapter(
+                    (activity as MainActivity),
+                    android.R.layout.simple_spinner_item,
+                    formatedMeeting
+                )
+                array_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spiMeetingDate.adapter = array_adapter
+            })
+
+        butRequestMeeting.setOnClickListener {
+            Log.i("aaaaaaaaaa", model.getDateMeetings().value?.get(spiMeetingDate.selectedItemPosition)?.id)
+        }
+
 
 
     }
@@ -70,8 +89,6 @@ class RequestMeetingFragment : DialogFragment() {
 
         return dialog
     }
-
-
 
 
 }

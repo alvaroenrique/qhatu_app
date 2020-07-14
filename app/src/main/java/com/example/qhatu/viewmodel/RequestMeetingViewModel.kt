@@ -1,5 +1,6 @@
 package com.example.qhatu.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,22 +12,24 @@ import java.util.*
 class RequestMeetingViewModel: ViewModel() {
     val fireStoreRep = FirestoreRepository()
 
-    private var dateMeetings = MutableLiveData<MutableList<String>>()
+    private var dateMeetings = MutableLiveData<MutableList<Meeting>>()
 
 
-    fun getDateMeetings(): LiveData<MutableList<String>> {
+    fun getDateMeetings(): LiveData<MutableList<Meeting>> {
         return  dateMeetings
     }
 
     fun setMeetingDateList() {
-        var newDateMeetings = mutableListOf<String>()
+        var newDateMeetings = mutableListOf<Meeting>()
         fireStoreRep.getMeetingDatesRef()
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
                     val newMeet = document.toObject(Meeting::class.java)
-                    val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-                    newDateMeetings.add(sfd.format(newMeet.date.toDate().time - 3600 * 5000))
+                    newMeet.id = document.id
+                    if (newMeet.available) {
+                        newDateMeetings.add(newMeet)
+                    }
                 }
                 dateMeetings.value = newDateMeetings
             }

@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import com.example.qhatu.R
 import com.example.qhatu.ui.mainflow.activities.MainActivity
 import kotlinx.android.synthetic.main.fragment_purchase_list.*
+import kotlinx.android.synthetic.main.fragment_request_meeting.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,7 +78,6 @@ class PurchaseListFragment : Fragment() {
             val fragmentManager =  requireActivity().supportFragmentManager
             val newFragment = RequestMeetingFragment()
             newFragment.show(fragmentManager, "dialog")
-
         }
 
     }

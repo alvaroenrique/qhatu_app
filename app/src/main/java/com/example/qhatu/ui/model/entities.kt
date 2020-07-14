@@ -34,5 +34,6 @@ data class Meeting(
     var available: Boolean = false,
     var date: Timestamp = Timestamp(
         Date()
-    )
+    ),
+    var id: String = ""
 )
