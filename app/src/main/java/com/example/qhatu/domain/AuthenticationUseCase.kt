@@ -73,4 +73,8 @@ class AuthenticationUseCase {
     fun getUserInformation(uid: String, block: (user: User) -> Unit) {
         authenticationRepository.getUserInformation(uid, block)
     }
+
+    fun signOut(){
+        authenticationRepository.firebaseSignOut()
+    }
 }
