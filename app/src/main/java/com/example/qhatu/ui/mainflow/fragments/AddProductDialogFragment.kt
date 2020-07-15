@@ -61,6 +61,14 @@ class AddProductDialogFragment : DialogFragment() {
                         Toast.makeText(activity, "Producto agregado", Toast.LENGTH_LONG).show()
                         dialog?.dismiss()
                     }
+
+
+                val activty_instance = activity as MainActivity
+                val curr = model.getCurrentProductId().value
+                if (curr != null) {
+                    activty_instance.ListasProductos(curr)
+                }
+
             }
 
         }
