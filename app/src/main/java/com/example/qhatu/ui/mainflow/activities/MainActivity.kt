@@ -13,7 +13,6 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.example.qhatu.viewmodel.MainActivityViewModel
 import com.example.qhatu.R
 import com.example.qhatu.adapters.ListadoComprasAdapter
 import com.example.qhatu.adapters.ListadoProductoAdapter
@@ -21,16 +20,18 @@ import com.example.qhatu.domain.ProfileUseCase
 import com.example.qhatu.model.*
 import com.example.qhatu.ui.mainflow.fragments.RequestMeetingFragment
 import com.example.qhatu.ui.mainflow.interfaces.OnDeliveryDatesNeeded
-import com.example.qhatu.viewmodel.ModalViewModel
-import com.example.qhatu.viewmodel.RequestOrderViewModel
+import com.example.qhatu.ui.mainflow.interfaces.OnHistoricalOrdersNeeded
+import com.example.qhatu.ui.mainflow.interfaces.OnPlaceOrder
+import com.example.qhatu.viewmodel.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded {
-    private var mlistarCategorias : ListView? = null
-    private var mlistarProductos : ListView? = null
-    private var db : FirebaseFirestore? = null
+class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded, OnPlaceOrder,
+    OnHistoricalOrdersNeeded {
+    private var mlistarCategorias: ListView? = null
+    private var mlistarProductos: ListView? = null
+    private var db: FirebaseFirestore? = null
 
     private lateinit var navController: NavController
     private lateinit var drawerLayout: DrawerLayout
@@ -41,8 +42,11 @@ class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded {
     private lateinit var mainActivityViewmodel: MainActivityViewModel
 
     // RequestOrderViewModel
-    private var requestOrderViewModel : RequestOrderViewModel? = null
-    private var availableDeliveryDateArrayList : ArrayList<DeliveryDate>? = null
+    private var requestOrderViewModel: RequestOrderViewModel? = null
+    private var authenticationViewModel: AuthenticationViewModel? = null
+    private var availableDeliveryDateArrayList: ArrayList<DeliveryDate>? = null
+    private var historicalOrderViewModel: HistoricalOrdersViewModel? = null
+    var historicalOrdersArrayList: ArrayList<HistoricalOrder>? = null
 
     private lateinit var modalViewmodel: ModalViewModel
 
@@ -51,8 +55,10 @@ class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setAuthenticationViewModel()
         setUpRequestOrderViewModel()
-        requestOrderViewModel!!.getAvailableDeliveryDateArray {  }
+        setUpHistoricalOrdersViewModel()
+        requestOrderViewModel!!.getAvailableDeliveryDateArray { }
 
         navController = findNavController(R.id.fragment)
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -74,34 +80,49 @@ class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded {
         profileUserCase.setUserData()
 
         modalViewmodel = ViewModelProvider(this).get(ModalViewModel::class.java)
-        modalViewmodel.getModalState().observe(this, Observer<ModalViewModel.ModalState> { newState ->
-            when(newState) {
-                ModalViewModel.ModalState.REQUEST_MEETING -> {
-                    modalConstraint.visibility = View.VISIBLE
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.modalFrameLayout, RequestMeetingFragment())
-                        commit()
+        modalViewmodel.getModalState()
+            .observe(this, Observer<ModalViewModel.ModalState> { newState ->
+                when (newState) {
+                    ModalViewModel.ModalState.REQUEST_MEETING -> {
+                        modalConstraint.visibility = View.VISIBLE
+                        supportFragmentManager.beginTransaction().apply {
+                            replace(R.id.modalFrameLayout, RequestMeetingFragment())
+                            commit()
+                        }
+                    }
+                    ModalViewModel.ModalState.CLOSED -> {
+                        modalConstraint.visibility = View.GONE
                     }
                 }
-                ModalViewModel.ModalState.CLOSED -> {
-                    modalConstraint.visibility = View.GONE
-                }
-            }
-        })
+            })
     }
 
-    fun setUpRequestOrderViewModel(){
+    fun setUpRequestOrderViewModel() {
         requestOrderViewModel = RequestOrderViewModel()
-        val availableDeliveryDatesObserver = Observer<ArrayList<DeliveryDate>>{
-            if (it.isNotEmpty()){
-                availableDeliveryDateArrayList = it
-            }
+        val availableDeliveryDatesObserver = Observer<ArrayList<DeliveryDate>> {
+            // Hacer algo
         }
-        requestOrderViewModel!!.getAvailableDeliveryDateArrayDataLiveData().observe(this, availableDeliveryDatesObserver)
+        requestOrderViewModel!!.getAvailableDeliveryDateArrayDataLiveData()
+            .observe(this, availableDeliveryDatesObserver)
     }
 
-    fun ListarCategorias(){
-        var listaCategorias  = ArrayList<Categorias>()
+    fun setAuthenticationViewModel() {
+        authenticationViewModel = AuthenticationViewModel()
+    }
+
+    fun setUpHistoricalOrdersViewModel() {
+        historicalOrderViewModel = HistoricalOrdersViewModel()
+
+        val historicalOrdersObserver = Observer<ArrayList<HistoricalOrder>> {
+            historicalOrdersArrayList = it
+        }
+
+        historicalOrderViewModel!!.getHistoricalOrdersLiveData()
+            .observe(this, historicalOrdersObserver)
+    }
+
+    fun ListarCategorias() {
+        var listaCategorias = ArrayList<Categorias>()
 
         db = FirebaseFirestore.getInstance()
         ListadoComprasManager().obtenerProductos(db as FirebaseFirestore) {
@@ -112,10 +133,10 @@ class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded {
         }
     }
 
-    fun ListasProductos(id_clickeado:String){
+    fun ListasProductos(id_clickeado: String) {
         var listaProducto = ArrayList<Producto>()
         db = FirebaseFirestore.getInstance()
-        ListadoProductoManager().obtenerListaProducto(id_clickeado, db as FirebaseFirestore){
+        ListadoProductoManager().obtenerListaProducto(id_clickeado, db as FirebaseFirestore) {
             listaProducto = it
             mlistarProductos = findViewById(R.id.liviPLProduct)
             mlistarProductos?.adapter = ListadoProductoAdapter(this, listaProducto)
@@ -134,4 +155,32 @@ class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded {
     override fun getDeliveryDates(): ArrayList<DeliveryDate>? {
         return availableDeliveryDateArrayList
     }
+
+    override fun placeOrder(
+        deliveryDate: DeliveryDate,
+        paymentMethod: String,
+        superMarket: String,
+        block: (success: Boolean) -> Unit
+    ) {
+        requestOrderViewModel!!.placeOrder(
+            deliveryDate,
+            paymentMethod,
+            superMarket,
+            block,
+            authenticationViewModel!!.getUserLiveData().value!!
+        )
+    }
+
+    override fun getHistoricalOrders(
+        block: (success: Boolean) -> Unit,
+        blockF: (orderList: ArrayList<HistoricalOrder>) -> Unit
+    ) {
+        historicalOrderViewModel!!.getHistoricalOrdersData(
+            authenticationViewModel!!.getUserLiveData().value!!.uid!!,
+            block,
+            blockF
+        )
+    }
+
+
 }

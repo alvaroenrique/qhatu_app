@@ -19,3 +19,15 @@ data class DeliveryDateInfo(
     val date: Timestamp = Timestamp(Date()),
     val limit: Long = 0
 )
+
+data class HistoricalOrder(
+    val item_id : Long = 0,
+    val doc_id : String = "",
+    val historicalOrderInfo : HistoricalOrdeInfo? = null
+)
+
+data class HistoricalOrdeInfo(
+    val date : Timestamp = Timestamp(Date()),
+    val purchaseList : Map<String, Any>? = null,
+    val id : Long? = null
+)

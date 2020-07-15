@@ -1,145 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:minWidth="360dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minWidth="350dp"
-    android:paddingHorizontal="15dp"
-    android:paddingVertical="30dp"
+    android:layout_centerInParent="true"
     xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/relaDate"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        tools:ignore="MissingConstraints">
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <RelativeLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/relaDate"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/teviReceptionDate"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/modal_field_text"
+                android:text="@string/dialog_deliver_date" />
+
+            <Spinner
+                android:id="@+id/spiDeliverDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="textEnd"
+                android:gravity="end"
+                android:entries="@array/deliver_date"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iviDate"
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/relaDate"
+            android:background="#000000"
+            tools:ignore="MissingConstraints" />
+
+        <RelativeLayout
+            android:id="@+id/relaPayment"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iviDate"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/teviPaymentMethod"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/modal_field_text"
+                android:text="@string/dialog_payment_method"/>
+
+            <Spinner
+                android:id="@+id/spiPaymentMethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textAlignment="textEnd"
+                android:gravity="end"
+                android:entries="@array/payment_method"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iviPayment"
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:background="#000000"
+            android:layout_below="@id/relaPayment"
+            tools:ignore="MissingConstraints" />
+
+        <RelativeLayout
+            android:id="@+id/relaMarket"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iviPayment"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/teviMarket"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_market"
+                android:textAppearance="@style/modal_field_text"
+                android:layout_centerVertical="true"/>
+
+            <Spinner
+                android:id="@+id/spiMarket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textAlignment="textEnd"
+                android:gravity="end"
+                android:entries="@array/markets"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iviMarket"
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:background="#000000"
+            android:layout_below="@id/relaMarket"
+            tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/teviReceptionDate"
-            android:layout_width="70dp"
+            android:id="@+id/teviAdvice"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/modal_field_text"
-            android:text="@string/dialog_deliver_date" />
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_below="@id/iviMarket"
+            android:text="@string/dialog_order_request_advice"
+            tools:ignore="MissingConstraints" />
 
-        <Spinner
-            android:id="@+id/spiDeliverDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textAlignment="textEnd"
-            android:gravity="end"
-            android:entries="@array/deliver_date"
-            android:layout_centerVertical="true"
-            />
+        <Button
+            android:id="@+id/butOrder"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/second_button"
+            android:textAppearance="@style/button_text"
+            android:layout_below="@+id/teviAdvice"
+            android:text="@string/dialog_order_button"
+            tools:ignore="MissingConstraints" />
 
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iviDate"
-        android:layout_width="350dp"
-        android:layout_height="1dp"
-        android:layout_below="@id/relaDate"
-        android:background="#000000"
-        tools:ignore="MissingConstraints" />
-
-    <RelativeLayout
-        android:id="@+id/relaPayment"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iviDate"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/teviPaymentMethod"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/modal_field_text"
-            android:text="@string/dialog_payment_method"/>
-
-        <Spinner
-            android:id="@+id/spiPaymentMethod"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:textAlignment="textEnd"
-            android:gravity="end"
-            android:entries="@array/payment_method"/>
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iviPayment"
-        android:layout_width="350dp"
-        android:layout_height="1dp"
-        android:background="#000000"
-        android:layout_below="@id/relaPayment"
-        tools:ignore="MissingConstraints" />
-
-    <RelativeLayout
-        android:id="@+id/relaMarket"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iviPayment"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/teviMarket"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:text="@string/dialog_market"
-            android:textAppearance="@style/modal_field_text"
-            android:layout_centerVertical="true"/>
-
-        <Spinner
-            android:id="@+id/spiMarket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:textAlignment="textEnd"
-            android:gravity="end"
-            android:entries="@array/markets"/>
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iviMarket"
-        android:layout_width="350dp"
-        android:layout_height="1dp"
-        android:background="#000000"
-        android:layout_below="@id/relaMarket"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/teviAdvice"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_below="@id/iviMarket"
-        android:text="@string/dialog_order_request_advice"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/butOrder"
-        android:layout_width="180dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/second_button"
-        android:textAppearance="@style/button_text"
-        android:layout_below="@+id/teviAdvice"
-        android:text="@string/dialog_order_button"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

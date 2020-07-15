@@ -15,7 +15,7 @@ class ProfileUseCase(private val model: MainActivityViewModel, private val conte
 
     private val fireStoreRepository = FirestoreRepository()
 
-    private val userId = "8HweNAVEWwkeKjru0CZH"
+    private val userId = "JMzpKqheYShECXMpNSkhdqSEeyw2"
 
     fun setUserData() {
         setCturrentUser()
