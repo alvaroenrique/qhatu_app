@@ -43,7 +43,7 @@ class ListadoProductoAdapter : BaseAdapter {
     }
 
     override fun getItem(position: Int): String {
-        val data = productos!!.get(position).nombre + "," + productos!!.get(position).detalle
+        val data = productos!!.get(position).nombre + "," + productos!!.get(position).detalle + "," + productos!!.get(position).id_doc
         return data
     }
 

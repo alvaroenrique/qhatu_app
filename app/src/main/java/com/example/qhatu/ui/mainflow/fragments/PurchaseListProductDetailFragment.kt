@@ -6,12 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.qhatu.R
+import com.example.qhatu.ui.mainflow.activities.MainActivity
+import com.example.qhatu.viewmodel.MainActivityViewModel
 
 class PurchaseListProductDetailFragment : Fragment() {
     private var teviPLProdDetailTitle : TextView? = null
     private var teviDetail : TextView? = null
+
+    private lateinit var model: MainActivityViewModel
 
     val args :PurchaseListProductDetailFragmentArgs by navArgs()
 
@@ -25,6 +30,9 @@ class PurchaseListProductDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        model = ViewModelProvider((activity as MainActivity)).get(MainActivityViewModel::class.java)
+        model.setAddIconVisible(false)
 
         val nombre_producto = args.nombre
         val detalle_producto = args.detalle

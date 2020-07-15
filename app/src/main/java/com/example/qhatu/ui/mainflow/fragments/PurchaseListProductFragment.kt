@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.qhatu.R
+import com.example.qhatu.data.FirestoreRepository
 import com.example.qhatu.ui.mainflow.activities.MainActivity
 import com.example.qhatu.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_add_product_dialog.*
@@ -61,6 +62,26 @@ class PurchaseListProductFragment : Fragment(){
         model.setAddIconVisible(true)
 
         model.setCurrentProductId(args.id)
+
+        mListarProductos?.setOnItemLongClickListener { _, view, position, id ->
+            Log.i("asdasdasd", mListarProductos?.adapter?.getItem(position).toString().split(",")[2])
+
+            val uid = model.getUid().value
+            if (uid != null) {
+                FirestoreRepository().getUserRefById(uid).collection("purchase-list")
+                    .document(mListarProductos?.adapter?.getItem(position).toString().split(",")[2])
+                    .delete()
+                    .addOnSuccessListener {
+                        val activty_instance = activity as MainActivity
+                        val curr = model.getCurrentProductId().value
+                        if (curr != null) {
+                            activty_instance.ListasProductos(curr)
+                        }
+                    }
+            }
+
+            false
+        }
 
     }
 
