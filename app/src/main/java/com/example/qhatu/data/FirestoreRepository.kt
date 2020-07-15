@@ -62,17 +62,35 @@ class FirestoreRepository {
         user: User
     ) {
         Log.d("bbb", user.uid!!)
-        val data = mapOf(
-            "users" to FieldValue.arrayUnion(
-                mapOf(
-                    "reference" to user.userReference,
-                    "paymentMethod" to paymentMethod,
-                    "superMarket" to superMarket
-                )
-            ),
+        // User info to order collection in deliver-dates
+        val dataToCollection = mapOf(
+            "userReference" to user.userReference,
+            "paymentMethod" to paymentMethod,
+            "superMarket" to superMarket,
+            "status" to "Confirmado",
+            "purchaseTicket" to 0
+        )
+
+        db.collection("deliver-dates").document(deliveryDate.docId).get().addOnSuccessListener {
+            if (it != null) {
+                // Duo reference in deliver-dates
+                Log.d("bbb", it["availableDuos"].toString())
+                // Place in order collection orders from deliver-date selected document
+                db.collection("deliver-dates").document(deliveryDate.docId).collection("orders")
+                    .document()
+                    .set(
+                        dataToCollection.plus("duoReference" to it["availableDuos"])
+                    )
+            }
+        }
+
+        // Increment users_count
+        val dataToDocument = mapOf(
             "users_count" to FieldValue.increment(1)
         )
-        db.collection("deliver-dates").document(deliveryDate.docId).update(data)
+
+
+        db.collection("deliver-dates").document(deliveryDate.docId).update(dataToDocument)
             .addOnSuccessListener {
                 block(true)
             }.addOnFailureListener {
@@ -80,6 +98,7 @@ class FirestoreRepository {
                 block(false)
             }
 
+        // Add order to user's order collection
         var data1 = mapOf<Any, Any>()
         db.collection("users").document(user.uid!!).collection("purchase-list").get()
             .addOnSuccessListener {
