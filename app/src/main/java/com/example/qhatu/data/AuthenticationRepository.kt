@@ -106,6 +106,7 @@ class AuthenticationRepository {
     fun firebaseSignOut(): Boolean {
         try {
             mauth.signOut()
+            Log.i("quatu", "ENTRAAAA")
             return true
         } catch (ex: Exception) {
             Log.d("SignOutLog::", ex.message!!)

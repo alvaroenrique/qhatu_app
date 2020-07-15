@@ -10,13 +10,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.qhatu.R
+import com.example.qhatu.data.AuthenticationRepository
 import com.example.qhatu.domain.ProfileUseCase
 import com.example.qhatu.ui.mainflow.activities.MainActivity
+import com.example.qhatu.ui.model.User
 import com.example.qhatu.ui.model.UserInfo
+import com.example.qhatu.viewmodel.AuthenticationViewModel
 
 import com.example.qhatu.viewmodel.MainActivityViewModel
 import com.squareup.picasso.Callback
@@ -26,9 +30,11 @@ import java.lang.Exception
 
 
 class ProfileFragment : Fragment() {
+    private var profileButtonCloseSession : Button? = null
 
     private val REQUEST_IMAGE_CAPTURE = 100
     private lateinit var model: MainActivityViewModel
+    private lateinit var model_auth : AuthenticationViewModel
     private lateinit var profileUserCase: ProfileUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +52,8 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        model_auth = AuthenticationViewModel()
+        profileButtonCloseSession = view.findViewById(R.id.profileButtonCloseSession)
 
         model = ViewModelProvider((activity as MainActivity)).get(MainActivityViewModel::class.java)
         profileUserCase = ProfileUseCase(model, (activity as MainActivity))
@@ -66,6 +74,11 @@ class ProfileFragment : Fragment() {
                 profilePhoneInput.text.toString().toLong(),
                 profileEmailInput.text.toString()
             )
+        }
+
+        profileButtonCloseSession?.setOnClickListener {
+            model_auth.signOut()
+            model_auth.setUser(User())
         }
 
         setUserProfileData()

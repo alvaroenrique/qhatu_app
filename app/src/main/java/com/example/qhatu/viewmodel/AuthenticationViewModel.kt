@@ -78,4 +78,8 @@ class AuthenticationViewModel : ViewModel() {
         return userLiveData
     }
 
+    fun signOut(){
+        authenticationUseCase.signOut()
+    }
+
 }

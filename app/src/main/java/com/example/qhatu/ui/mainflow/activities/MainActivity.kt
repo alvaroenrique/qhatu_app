@@ -1,5 +1,6 @@
 package com.example.qhatu.ui.mainflow.activities
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,7 +24,9 @@ import com.example.qhatu.model.Categorias
 import com.example.qhatu.model.ListadoComprasManager
 import com.example.qhatu.model.ListadoProductoManager
 import com.example.qhatu.model.Producto
+import com.example.qhatu.ui.authentication.activities.AuthenticationActivity
 import com.example.qhatu.ui.mainflow.fragments.AddProductDialogFragment
+import com.example.qhatu.ui.model.User
 import com.example.qhatu.viewmodel.AuthenticationViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
@@ -78,6 +81,14 @@ class MainActivity : AppCompatActivity() {
 
         initAddButton()
 
+        val authenticationObserver = Observer<User> {
+            if(it==null){
+                goToAuthenticationActivity()
+            }
+        }
+
+        authViewModel?.getUserLiveData()?.observe(this, authenticationObserver)
+
     }
 
     fun ListarCategorias(){
@@ -93,12 +104,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun ListasProductos(id_clickeado:String){
+        mainActivityViewmodel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        val uid = mainActivityViewmodel.getUid().value
         var listaProducto = ArrayList<Producto>()
         db = FirebaseFirestore.getInstance()
-        ListadoProductoManager().obtenerListaProducto(id_clickeado, db as FirebaseFirestore){
+        ListadoProductoManager().obtenerListaProducto(uid.toString(), id_clickeado, db as FirebaseFirestore){
             listaProducto = it
             mlistarProductos = findViewById(R.id.liviPLProduct)
             mlistarProductos?.adapter = ListadoProductoAdapter(this, listaProducto)
+            Log.i("quatu", "ESTO ES ->" + uid)
         }
     }
 
@@ -125,5 +139,12 @@ class MainActivity : AppCompatActivity() {
                 iconAdd.visibility = View.GONE
             }
         })
+    }
+
+    fun goToAuthenticationActivity(){
+        val intent = Intent()
+        intent.setClass(this, AuthenticationActivity::class.java)
+        startActivityForResult(intent, 1000)
+        this.finish()
     }
 }
