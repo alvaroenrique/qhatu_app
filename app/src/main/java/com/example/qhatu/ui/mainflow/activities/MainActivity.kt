@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded, OnPlaceOrder,
     fun setUpRequestOrderViewModel() {
         requestOrderViewModel = RequestOrderViewModel()
         val availableDeliveryDatesObserver = Observer<ArrayList<DeliveryDate>> {
-            // Hacer algo
+            availableDeliveryDateArrayList = it
         }
         requestOrderViewModel!!.getAvailableDeliveryDateArrayDataLiveData()
             .observe(this, availableDeliveryDatesObserver)
