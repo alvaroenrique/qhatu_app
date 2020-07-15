@@ -20,19 +20,22 @@ import com.example.qhatu.R
 import com.example.qhatu.adapters.ListadoComprasAdapter
 import com.example.qhatu.adapters.ListadoProductoAdapter
 import com.example.qhatu.domain.ProfileUseCase
-import com.example.qhatu.model.Categorias
-import com.example.qhatu.model.ListadoComprasManager
-import com.example.qhatu.model.ListadoProductoManager
-import com.example.qhatu.model.Producto
+import com.example.qhatu.model.*
 import com.example.qhatu.ui.authentication.activities.AuthenticationActivity
 import com.example.qhatu.ui.mainflow.fragments.AddProductDialogFragment
+import com.example.qhatu.ui.mainflow.interfaces.OnDeliveryDatesNeeded
+import com.example.qhatu.ui.mainflow.interfaces.OnHistoricalOrdersNeeded
+import com.example.qhatu.ui.mainflow.interfaces.OnPlaceOrder
 import com.example.qhatu.ui.model.User
 import com.example.qhatu.viewmodel.AuthenticationViewModel
+import com.example.qhatu.viewmodel.HistoricalOrdersViewModel
+import com.example.qhatu.viewmodel.RequestOrderViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnDeliveryDatesNeeded, OnPlaceOrder,
+    OnHistoricalOrdersNeeded {
     private var mlistarCategorias : ListView? = null
     private var mlistarProductos : ListView? = null
     private var db : FirebaseFirestore? = null
@@ -45,6 +48,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainActivityViewmodel: MainActivityViewModel
 
+    // RequestOrderViewModel
+    private var requestOrderViewModel: RequestOrderViewModel? = null
+    private var authenticationViewModel: AuthenticationViewModel? = null
+    private var availableDeliveryDateArrayList: ArrayList<DeliveryDate>? = null
+    private var historicalOrderViewModel: HistoricalOrdersViewModel? = null
+    var historicalOrdersArrayList: ArrayList<HistoricalOrder>? = null
+
     private lateinit var profileUserCase: ProfileUseCase
 
     private lateinit var authViewModel: AuthenticationViewModel
@@ -52,6 +62,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setAuthenticationViewModel()
+        setUpRequestOrderViewModel()
+        setUpHistoricalOrdersViewModel()
+        requestOrderViewModel!!.getAvailableDeliveryDateArray { }
 
         authViewModel = ViewModelProvider(this).get(AuthenticationViewModel::class.java)
 
@@ -89,6 +103,30 @@ class MainActivity : AppCompatActivity() {
 
         authViewModel?.getUserLiveData()?.observe(this, authenticationObserver)
 
+    }
+
+    fun setUpRequestOrderViewModel() {
+        requestOrderViewModel = RequestOrderViewModel()
+        val availableDeliveryDatesObserver = Observer<ArrayList<DeliveryDate>> {
+            // Hacer algo
+        }
+        requestOrderViewModel!!.getAvailableDeliveryDateArrayDataLiveData()
+            .observe(this, availableDeliveryDatesObserver)
+    }
+
+    fun setAuthenticationViewModel() {
+        authenticationViewModel = AuthenticationViewModel()
+    }
+
+    fun setUpHistoricalOrdersViewModel() {
+        historicalOrderViewModel = HistoricalOrdersViewModel()
+
+        val historicalOrdersObserver = Observer<ArrayList<HistoricalOrder>> {
+            historicalOrdersArrayList = it
+        }
+
+        historicalOrderViewModel!!.getHistoricalOrdersLiveData()
+            .observe(this, historicalOrdersObserver)
     }
 
     fun ListarCategorias(){
@@ -146,5 +184,35 @@ class MainActivity : AppCompatActivity() {
         intent.setClass(this, AuthenticationActivity::class.java)
         startActivityForResult(intent, 1000)
         this.finish()
+    }
+
+    override fun getDeliveryDates(): ArrayList<DeliveryDate>? {
+        return availableDeliveryDateArrayList
+    }
+
+    override fun placeOrder(
+        deliveryDate: DeliveryDate,
+        paymentMethod: String,
+        superMarket: String,
+        block: (success: Boolean) -> Unit
+    ) {
+        requestOrderViewModel!!.placeOrder(
+            deliveryDate,
+            paymentMethod,
+            superMarket,
+            block,
+            authenticationViewModel!!.getUserLiveData().value!!
+        )
+    }
+
+    override fun getHistoricalOrders(
+        block: (success: Boolean) -> Unit,
+        blockF: (orderList: ArrayList<HistoricalOrder>) -> Unit
+    ) {
+        historicalOrderViewModel!!.getHistoricalOrdersData(
+            authenticationViewModel!!.getUserLiveData().value!!.uid!!,
+            block,
+            blockF
+        )
     }
 }

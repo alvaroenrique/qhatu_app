@@ -26,6 +26,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class PurchaseListFragment : Fragment() {
     private var mlistarCategorias : ListView? = null
+    private var requestOrderDialogFragment : RequestOrderDialogFragment? = null
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -49,6 +50,8 @@ class PurchaseListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requestOrderDialogFragment = RequestOrderDialogFragment()
 
         val activity_instance = activity as MainActivity
 
@@ -78,6 +81,10 @@ class PurchaseListFragment : Fragment() {
             val fragmentManager =  requireActivity().supportFragmentManager
             val newFragment = RequestMeetingFragment()
             newFragment.show(fragmentManager, "dialog")
+        }
+
+        butOrderReq.setOnClickListener {
+            requestOrderDialogFragment!!.show(requireActivity().supportFragmentManager, "RequestOrderDialogFragment")
         }
 
     }
