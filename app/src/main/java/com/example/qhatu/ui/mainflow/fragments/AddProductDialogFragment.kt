@@ -55,7 +55,7 @@ class AddProductDialogFragment : DialogFragment() {
                         "measurement-unit" to eteMeasurementUnit.selectedItem,
                         "product-category" to firestore.getProductCategoryRef(model.getCurrentProductId().value),
                         "product-name" to eteProductName.text.toString(),
-                        "quantity" to eteMesurementQuantity.text?.toString()?.toInt()
+                        "quantity" to eteProductQuantity.text?.toString()?.toInt()
                     ))
                     .addOnSuccessListener {
                         Toast.makeText(activity, "Producto agregado", Toast.LENGTH_LONG).show()

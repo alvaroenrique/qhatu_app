@@ -58,6 +58,7 @@
             android:hint="Correo electronico"/>
 
         <EditText
+            android:inputType="textPassword"
             android:id="@+id/etePass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
