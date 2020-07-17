@@ -14,8 +14,11 @@ import com.example.qhatu.data.FirestoreRepository
 import com.example.qhatu.ui.mainflow.activities.MainActivity
 import com.example.qhatu.ui.model.Order
 import com.example.qhatu.viewmodel.MainActivityViewModel
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_current_purchase.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class CurrentPurchaseFragment : Fragment() {
@@ -54,6 +57,9 @@ class CurrentPurchaseFragment : Fragment() {
             teviOrderDetailServiceCost.text = "s/.  ${newOrder.cost.toString()}"
             teviOrderDetailStatus.text = newOrder.state
             teviOrderDetailSuperMarket.text = newOrder.supermarket
+            val locale = Locale("es", "PE")
+            val format = SimpleDateFormat("EEEE d 'de' MMMM", locale)
+            teviOrderDetailDeliveryDate.text =format.format(newOrder.date.toDate()).capitalize()
         })
 
 
@@ -66,10 +72,14 @@ class CurrentPurchaseFragment : Fragment() {
                 .collection("orders")
                 .orderBy("date", Query.Direction.DESCENDING).limit(1)
                 .get().addOnSuccessListener { result ->
-                    Log.i("ahorappppppp", "${result.documents[0].id}")
                     val newOrder = result.documents[0].toObject(Order::class.java)
                     if (newOrder != null) {
-                        model.setCurrentOrder(newOrder)
+
+                        newOrder.dateReference?.get()?.addOnSuccessListener {
+
+                            newOrder.date = it.data?.get("date") as Timestamp
+                            model.setCurrentOrder(newOrder)
+                        }
                     }
                 }
 

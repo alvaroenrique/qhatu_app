@@ -42,8 +42,7 @@
             android:layout_centerVertical="true"
             android:textAlignment="viewEnd"
             android:gravity="end"
-            android:textAppearance="@style/normal_text"
-            android:text="@string/deliver_date_text"/>
+            android:textAppearance="@style/normal_text"/>
 
     </RelativeLayout>
 

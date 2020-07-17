@@ -56,5 +56,6 @@ data class Order(
     var ticketPurchase: String = "",
     var cost: Long = 0,
     var state: String = "",
-    var supermarket: String = ""
+    var supermarket: String = "",
+    var dateReference: DocumentReference? = null
 )
