@@ -37,3 +37,24 @@ data class Meeting(
     ),
     var id: String = ""
 )
+
+data class Worker(
+    var apellido1: String = "",
+    var apellido2: String = "",
+    var celular1: Long = 0,
+    var celular2: Long = 0,
+    var modeloCarro: String = "",
+    var nombre1: String = "",
+    var nombre2: String = "",
+    var placaCarro: String = ""
+)
+
+data class Order(
+    var date: Timestamp = Timestamp(
+        Date()
+    ),
+    var ticketPurchase: String = "",
+    var cost: Long = 0,
+    var state: String = "",
+    var supermarket: String = ""
+)

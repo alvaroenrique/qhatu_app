@@ -102,8 +102,7 @@
             android:layout_centerVertical="true"
             android:textAlignment="viewEnd"
             android:gravity="end"
-            android:textAppearance="@style/normal_text"
-            android:text="@string/service_cost_value"/>
+            android:textAppearance="@style/normal_text" />
 
     </RelativeLayout>
 
@@ -132,8 +131,7 @@
             android:layout_centerVertical="true"
             android:textAlignment="viewEnd"
             android:gravity="end"
-            android:textAppearance="@style/normal_text"
-            android:text="@string/order_state_value"/>
+            android:textAppearance="@style/normal_text"/>
 
     </RelativeLayout>
 
@@ -162,8 +160,7 @@
             android:layout_centerVertical="true"
             android:textAlignment="viewEnd"
             android:gravity="end"
-            android:textAppearance="@style/normal_text"
-            android:text="@string/supermarket_selected"/>
+            android:textAppearance="@style/normal_text"/>
 
     </RelativeLayout>
 
