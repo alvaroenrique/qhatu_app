@@ -63,7 +63,7 @@
     <string name="dialog_sorry_text">Nos disculpamos por inconveniente causado. Como startup preocupada por la experiencia de nuestros usuarios, iniciaremos una investigació sobre el caso. Nos comunicaremos con usted en un rango de 24-48 horas. Confirme su denuncia por favor, o en todo caso cancele el proceso.</string>
     <string name="dialog_cancel_button">Cancelar</string>
     <string name="dialog_complaint_button">Denunciar</string>
-    <string name="dialog_what_happened">Cuentanos, ¿Que paso?</string>
+    <string name="dialog_what_happened">Cuéntanos, ¿Qué pasó?</string>
     <string name="dialog_complaint_hint">Detalla el suceso aqui</string>
     <string name="dialog_wait">¡Un momento!</string>
     <string name="dialog_wait_text">Al presionar eliminar usted eliminara 1 leche gloria de 1 litro de su lista de productos. Este cambio no puede ser revertido. Pero si puede volver a anadir el producto cuando desee.</string>

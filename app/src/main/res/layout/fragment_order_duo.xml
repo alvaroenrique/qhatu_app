@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.mainflow.fragments.OrderDuoFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <TextView
         android:id="@+id/teviOrderDuo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/deliver_duo_title"
-        android:textAppearance="@style/sectitle"
+        android:background="@drawable/border_bottom"
         android:paddingLeft="30dp"
-        android:paddingRight="30dp"
         android:paddingTop="15dp"
+        android:paddingRight="30dp"
         android:paddingBottom="15dp"
-        android:background="@drawable/border_bottom"/>
+        android:text="@string/deliver_duo_title"
+        android:textAppearance="@style/sectitle" />
 
     <RelativeLayout
         android:id="@+id/relaOrderDuo"
@@ -27,33 +31,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/image_duo"/>
+            android:src="@drawable/image_duo" />
 
         <RelativeLayout
             android:id="@+id/relaDuoName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_below="@id/iviOrderDuo">
+            android:layout_below="@id/iviOrderDuo"
+            android:layout_marginVertical="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/duo_names"
-                android:textAppearance="@style/item_list_name"
-                android:layout_centerVertical="true"/>
+                android:textAppearance="@style/item_list_name" />
 
             <TextView
                 android:id="@+id/teviDuoName"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:text="@string/duo_names_text"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:textAlignment="viewEnd"
-                android:gravity="end"
-                android:textAppearance="@style/normal_text"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                android:gravity="end"
+                android:text="@string/duo_names_text"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/normal_text" />
 
         </RelativeLayout>
 
@@ -61,27 +65,27 @@
             android:id="@+id/relaDuoPhones"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_below="@id/relaDuoName">
+            android:layout_below="@id/relaDuoName"
+            android:layout_marginVertical="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/duo_phones"
-                android:textAppearance="@style/item_list_name"
-                android:layout_centerVertical="true"/>
+                android:textAppearance="@style/item_list_name" />
 
             <TextView
                 android:id="@+id/teviDuoPhones"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:text="@string/duo_phones_text"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:textAlignment="viewEnd"
-                android:gravity="end"
-                android:textAppearance="@style/normal_text"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                android:gravity="end"
+                android:text="@string/duo_phones_text"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/normal_text" />
 
         </RelativeLayout>
 
@@ -89,27 +93,27 @@
             android:id="@+id/relaDuoCarModel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_below="@id/relaDuoPhones">
+            android:layout_below="@id/relaDuoPhones"
+            android:layout_marginVertical="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/duo_car_model"
-                android:textAppearance="@style/item_list_name"
-                android:layout_centerVertical="true"/>
+                android:textAppearance="@style/item_list_name" />
 
             <TextView
                 android:id="@+id/teviDuoCarModel"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:text="@string/duo_car_model_text"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:textAlignment="viewEnd"
-                android:gravity="end"
-                android:textAppearance="@style/normal_text"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                android:gravity="end"
+                android:text="@string/duo_car_model_text"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/normal_text" />
 
         </RelativeLayout>
 
@@ -117,27 +121,27 @@
             android:id="@+id/relaDuoCarPlate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_below="@id/relaDuoCarModel">
+            android:layout_below="@id/relaDuoCarModel"
+            android:layout_marginVertical="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/duo_car_plate"
-                android:textAppearance="@style/item_list_name"
-                android:layout_centerVertical="true"/>
+                android:textAppearance="@style/item_list_name" />
 
             <TextView
                 android:id="@+id/teviDuoCarPlate"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:text="@string/duo_car_plate_text"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:textAlignment="viewEnd"
-                android:gravity="end"
-                android:textAppearance="@style/normal_text"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                android:gravity="end"
+                android:text="@string/duo_car_plate_text"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/normal_text" />
 
         </RelativeLayout>
 
@@ -146,21 +150,21 @@
             android:layout_width="180dp"
             android:layout_height="30dp"
             android:layout_above="@+id/butOrderComplaint"
-            android:text="@string/dialog_rate_button"
             android:layout_centerHorizontal="true"
-            android:textAppearance="@style/button_text"
-            android:background="@drawable/blue_button"/>
+            android:background="@drawable/blue_button"
+            android:text="@string/dialog_rate_button"
+            android:textAppearance="@style/button_text" />
 
         <Button
             android:id="@+id/butOrderComplaint"
             android:layout_width="180dp"
             android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/dialog_complaint_button"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:textAppearance="@style/button_text"
-            android:background="@drawable/red_button"/>
+            android:layout_marginTop="10dp"
+            android:background="@drawable/red_button"
+            android:text="@string/dialog_complaint_button"
+            android:textAppearance="@style/button_text" />
 
     </RelativeLayout>
 
